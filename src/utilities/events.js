@@ -79,11 +79,20 @@ export function sumbitNewProject(component, targetList) {
   });
 }
 
-// NEW PROJECT NAME - INPUT
+// NEW PROJECT NAME - INPUT - CLICK
 export function clickNewProjectName() {
   const newProjectName = document.getElementById('newProjectName');
 
   newProjectName.addEventListener('click', () => {
+    removeErrorBgClass(newProjectName);
+  });
+}
+
+// NEW PROJECT NAME - INPUT - INPUT
+export function inputNewProjectName() {
+  const newProjectName = document.getElementById('newProjectName');
+
+  newProjectName.addEventListener('input', () => {
     removeErrorBgClass(newProjectName);
   });
 }

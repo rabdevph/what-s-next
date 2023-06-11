@@ -6,6 +6,7 @@ import {
   clickNewProject,
   clickNewProjectName,
   sumbitNewProject,
+  inputNewProjectName,
 } from './utilities/events';
 import { PERSONALPROJECT } from './utilities/helper';
 
@@ -22,3 +23,4 @@ clickNewProject();
 clickCancelProject();
 sumbitNewProject(ProjectNavItems, projectsNavList);
 clickNewProjectName();
+inputNewProjectName();
