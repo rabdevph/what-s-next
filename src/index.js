@@ -2,6 +2,8 @@ import {
   clickCancelProject,
   clickNavListItems,
   clickNewProject,
+  clickNewProjectName,
+  sumbitNewProject,
 } from './utilities/events';
 
 // temporary
@@ -14,6 +16,8 @@ console.log('Hello World!');
 clickNavListItems();
 clickNewProject();
 clickCancelProject();
+sumbitNewProject();
+clickNewProjectName();
 
 // const personal = createProject('Personal');
 // saveToStorage(personal.name, personal);

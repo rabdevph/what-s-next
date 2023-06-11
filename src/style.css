@@ -15,6 +15,8 @@
   --clr-light-zinc: #3f3f46;
 
   --btn-blue: #2563eb;
+
+  --bg-error: #fecaca;
 }
 
 *,
@@ -182,6 +184,11 @@ nav {
 
 .padding-box {
   padding: 12px 24px;
+}
+
+/* ERROR BG COLOR */
+.error-bg {
+  background-color: var(--bg-error);
 }
 
 /* HIDDEN */

@@ -6,6 +6,19 @@ export function toggleHiddenClass(element) {
   }
 }
 
-export function ttt() {
-  //
+export function addErrorBgClass(element) {
+  if (!element.classList.contains('error-bg')) {
+    element.classList.add('error-bg');
+  }
+}
+
+export function removeErrorBgClass(element) {
+  if (element.classList.contains('error-bg')) {
+    element.classList.remove('error-bg');
+  }
+}
+
+export function clearInput(targetElement) {
+  const element = targetElement;
+  element.value = '';
 }
