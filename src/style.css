@@ -1,4 +1,113 @@
-* {
+@font-face {
+  font-family: 'Bangers';
+  src: url('../src/assets/bangers.ttf');
+}
+
+:root {
+  --ff-base: system-ui;
+  --ff-logo: 'Bangers', cursive;
+
+  --fc-white: #ffffff;
+
+  --clr-white: #ffffff;
+  --clr-dark-zinc: #27272a;
+  --clr-light-zinc: #3f3f46;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: var(--ff-base);
+  line-height: 1.5;
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+
+/* ASIDE */
+aside {
+  background-color: var(--clr-dark-zinc);
+  color: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* HEADER */
+header {
+  color: var(--fc-white);
+  min-height: 64px;
+  padding: 0 12px 0 12px;
+}
+
+.logo {
+  gap: 4px;
+}
+
+.logo__icon {
+  height: 28px;
+}
+
+.logo__text {
+  font-family: var(--ff-logo);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* NAV */
+nav {
+  flex: 1;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* COMMON */
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.padding-box {
+  padding: 12px 24px;
+}
+
+.list-item {
+  cursor: pointer;
+  gap: 6px;
+}
+
+.list-item:hover {
+  background-color: var(--clr-light-zinc);
+}
+
+.list-icon {
+  height: 16px;
+}
+
+/* HIDDEN */
+.hidden {
+  display: none;
 }

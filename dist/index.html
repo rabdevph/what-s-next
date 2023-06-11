@@ -8,5 +8,40 @@
     <script src="bundle.js" defer></script>
     <title>What's Next?</title>
   </head>
-  <body></body>
+  <body>
+    <!-- MAIN -->
+    <main>
+      <!-- ASIDE -->
+      <aside>
+        <!-- HEADER -->
+        <header class="flx-r">
+          <div class="logo flex-row">
+            <img src="../src/assets/logo.svg" class="logo__icon" />
+            <p class="logo__text">WHAT'S NEXT?</p>
+          </div>
+        </header>
+        <nav class="flex-column">
+          <ul class="navList">
+            <li class="list-item flex-row padding-box">
+              <img src="../src/assets/today.svg" class="list-icon" />
+              <p class="list-text">TODAY</p>
+            </li>
+            <li class="list-item flex-row padding-box">
+              <img src="../src/assets/week.svg" class="list-icon" />
+              <p class="list-text">UPCOMING</p>
+            </li>
+            <li
+              class="list-item flex-row padding-box"
+              id="projectPersonal"
+              data-id="Personal"
+            >
+              <img src="../src/assets/project.svg" class="list-icon" />
+              <p class="list-text">PERSONAL</p>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <section class="taskSection" id="taskSection"></section>
+    </main>
+  </body>
 </html>
