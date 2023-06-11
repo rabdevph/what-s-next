@@ -8,14 +8,21 @@ import { saveToStorage } from './data';
 import { isProjectExisting } from './helper';
 import createProject from './todo';
 
-// DEFAULT NAVIGATION LIST
+// DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
 export function clickNavListItems() {
   const navListItems = document.querySelectorAll('.navList__item');
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
       //
-      console.log(navListItem);
+      console.log(navListItem.id);
     });
+  });
+}
+
+// PROJECTS NAVIGATION LIST
+export function clickProjectItems(item) {
+  item.addEventListener('click', () => {
+    console.log(item.id);
   });
 }
 
@@ -48,7 +55,7 @@ export function clickCancelProject() {
 }
 
 // NEW PROJECT FORM - SUBMIT
-export function sumbitNewProject() {
+export function sumbitNewProject(component, targetList) {
   const newProjectName = document.getElementById('newProjectName');
   const newProjectButton = document.getElementById('newProjectButton');
   const newProjectForm = document.getElementById('newProjectForm');
@@ -57,7 +64,7 @@ export function sumbitNewProject() {
     e.preventDefault();
 
     const projectName = newProjectName.value;
-    const isExisting = isProjectExisting(projectName); // return true if existing
+    const isExisting = isProjectExisting(projectName.toUpperCase()); // return true if existing
 
     if (!projectName || isExisting) {
       addErrorBgClass(newProjectName); // if project name empty or existing already
@@ -67,6 +74,7 @@ export function sumbitNewProject() {
       toggleHiddenClass(newProjectForm); // hide new project form
       toggleHiddenClass(newProjectButton); // show new project button
       clearInput(newProjectName); // clear text
+      component(targetList); // ProjectNavItems(projectsNavList) - load newly added project
     }
   });
 }

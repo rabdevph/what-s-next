@@ -1,3 +1,5 @@
+import ProjectNavItems from './components/Projects';
+
 import {
   clickCancelProject,
   clickNavListItems,
@@ -8,6 +10,8 @@ import {
 import { PERSONALPROJECT } from './utilities/helper';
 
 console.log('Hello World!');
+const projectsNavList = document.getElementById('projectsNavList');
+ProjectNavItems(projectsNavList);
 
 // this will create a PERSONAL default project for new users
 PERSONALPROJECT();
@@ -16,5 +20,5 @@ PERSONALPROJECT();
 clickNavListItems();
 clickNewProject();
 clickCancelProject();
-sumbitNewProject();
+sumbitNewProject(ProjectNavItems, projectsNavList);
 clickNewProjectName();

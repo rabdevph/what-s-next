@@ -22,3 +22,9 @@ export function clearInput(targetElement) {
   const element = targetElement;
   element.value = '';
 }
+
+export const clearContent = (element) => {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+};
