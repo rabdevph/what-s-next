@@ -76,8 +76,15 @@ header {
 nav {
   flex: 1;
   font-size: 0.75rem;
-  font-weight: bold;
 }
+
+.projectsHeader {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+/* ============================ */
 
 /* COMMON */
 .flex-row {

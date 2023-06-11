@@ -14,30 +14,37 @@
       <!-- ASIDE -->
       <aside>
         <!-- HEADER -->
-        <header class="flx-r">
+        <header class="flex-row">
           <div class="logo flex-row">
             <img src="../src/assets/logo.svg" class="logo__icon" />
             <p class="logo__text">WHAT'S NEXT?</p>
           </div>
         </header>
+
+        <!-- NAV -->
         <nav class="flex-column">
+          <!-- default navigation -->
           <ul class="navList">
-            <li class="list-item flex-row padding-box">
+            <li class="navList__item list-item flex-row padding-box">
               <img src="../src/assets/today.svg" class="list-icon" />
               <p class="list-text">TODAY</p>
             </li>
-            <li class="list-item flex-row padding-box">
+            <li class="navList__item list-item flex-row padding-box">
               <img src="../src/assets/week.svg" class="list-icon" />
               <p class="list-text">UPCOMING</p>
             </li>
             <li
-              class="list-item flex-row padding-box"
+              class="navList__item list-item flex-row padding-box"
               id="projectPersonal"
               data-id="Personal"
             >
               <img src="../src/assets/project.svg" class="list-icon" />
               <p class="list-text">PERSONAL</p>
             </li>
+          </ul>
+          <p class="projectsHeader padding-box">PROJECTS</p>
+          <ul class="projectsNavList" id="projectsNavList">
+            <!-- project names here -->
           </ul>
         </nav>
       </aside>
