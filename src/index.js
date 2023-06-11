@@ -1,4 +1,8 @@
-import { clickNavListItems, clickNewProject } from './utilities/events';
+import {
+  clickCancelProject,
+  clickNavListItems,
+  clickNewProject,
+} from './utilities/events';
 
 // temporary
 // import createProject from './utilities/todo';
@@ -9,6 +13,7 @@ console.log('Hello World!');
 // EVENT HANDLERS
 clickNavListItems();
 clickNewProject();
+clickCancelProject();
 
 // const personal = createProject('Personal');
 // saveToStorage(personal.name, personal);
