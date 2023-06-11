@@ -62,10 +62,11 @@ export function sumbitNewProject() {
     if (!projectName || isExisting) {
       addErrorBgClass(newProjectName); // if project name empty or existing already
     } else {
-      const project = createProject(projectName); // create project
+      const project = createProject(projectName.toUpperCase()); // create project
       saveToStorage(project.name, project); // save to localStorage
       toggleHiddenClass(newProjectForm); // hide new project form
       toggleHiddenClass(newProjectButton); // show new project button
+      clearInput(newProjectName); // clear text
     }
   });
 }

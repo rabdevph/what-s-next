@@ -5,12 +5,12 @@ import {
   clickNewProjectName,
   sumbitNewProject,
 } from './utilities/events';
-
-// temporary
-// import createProject from './utilities/todo';
-// import { saveToStorage } from './utilities/data';
+import { PERSONALPROJECT } from './utilities/helper';
 
 console.log('Hello World!');
+
+// this will create a PERSONAL default project for new users
+PERSONALPROJECT();
 
 // EVENT HANDLERS
 clickNavListItems();
@@ -18,6 +18,3 @@ clickNewProject();
 clickCancelProject();
 sumbitNewProject();
 clickNewProjectName();
-
-// const personal = createProject('Personal');
-// saveToStorage(personal.name, personal);
