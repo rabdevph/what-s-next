@@ -25,27 +25,83 @@
         <nav class="flex-column">
           <!-- default navigation -->
           <ul class="navList">
-            <li class="navList__item list-item flex-row padding-box">
+            <li
+              class="navList__item list-item flex-row padding-box"
+              id="todayList"
+            >
               <img src="../src/assets/today.svg" class="list-icon" />
               <p class="list-text">TODAY</p>
             </li>
-            <li class="navList__item list-item flex-row padding-box">
+            <li
+              class="navList__item list-item flex-row padding-box"
+              id="upcomingList"
+            >
               <img src="../src/assets/week.svg" class="list-icon" />
               <p class="list-text">UPCOMING</p>
             </li>
             <li
               class="navList__item list-item flex-row padding-box"
-              id="projectPersonal"
+              id="personalList"
               data-id="Personal"
             >
               <img src="../src/assets/project.svg" class="list-icon" />
               <p class="list-text">PERSONAL</p>
             </li>
           </ul>
+
+          <!-- projects header -->
           <p class="projectsHeader padding-box">PROJECTS</p>
+
           <ul class="projectsNavList" id="projectsNavList">
-            <!-- project names here -->
+            <!-- project navigation -->
           </ul>
+
+          <!-- NEW PROJECT CONTROLS -->
+          <section class="newProjectControl">
+            <!-- new project button -->
+            <button
+              class="newProjectButton list-item flex-row padding-box"
+              id="newProjectButton"
+            >
+              <img
+                src="../src/assets/plus-circle.svg"
+                class="newProjectButton__icon"
+              />
+              <p class="newProjectButton__text">NEW PROJECT</p>
+            </button>
+
+            <!-- new project form -->
+            <form class="newProjectForm padding-box hidden" id="newProjectForm">
+              <!-- input type text -->
+              <input
+                class="newProjectForm__input"
+                id="newProjectName"
+                type="text"
+                placeholder="Enter project name"
+                autocomplete="off"
+                tabindex="-1"
+              />
+
+              <!-- button -->
+              <div class="newProjectFormButton flex-row">
+                <input
+                  class="newProjectFormButton__button button-common"
+                  id="cancelButton"
+                  type="button"
+                  value="CANCEL"
+                  tabindex="-1"
+                />
+
+                <input
+                  class="newProjectFormButton__button button-common"
+                  id="addButton"
+                  type="submit"
+                  value="ADD"
+                  tabindex="-1"
+                />
+              </div>
+            </form>
+          </section>
         </nav>
       </aside>
       <section class="taskSection" id="taskSection"></section>

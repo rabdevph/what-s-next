@@ -8,10 +8,13 @@
   --ff-logo: 'Bangers', cursive;
 
   --fc-white: #ffffff;
+  --fc-black: #000000;
 
   --clr-white: #ffffff;
   --clr-dark-zinc: #27272a;
   --clr-light-zinc: #3f3f46;
+
+  --btn-blue: #2563eb;
 }
 
 *,
@@ -76,17 +79,84 @@ header {
 nav {
   flex: 1;
   font-size: 0.75rem;
+  height: min-content;
 }
 
+/* -------- */
+/* PROJECTS */
+/* -------- */
+
+/* projects header */
 .projectsHeader {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.1em;
 }
 
+/* ------------------ */
+/* NEW PROJECT BUTTON */
+/* ------------------ */
+
+/* button */
+.newProjectButton {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  /* display: flex;
+  align-items: center; */
+  font-size: inherit;
+  font-weight: inherit;
+  width: 100%;
+}
+
+.newProjectButton__icon {
+  height: 16px;
+}
+
+/* ---------------- */
+/* NEW PROJECT FORM */
+/* ---------------- */
+
+/* form */
+.newProjectForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+/* input type text */
+.newProjectForm__input {
+  border: 0;
+  background-color: var(--clr-white);
+  font-family: inherit;
+  outline: 0;
+  padding: 6px;
+}
+
+/* wrapper */
+.newProjectFormButton {
+  align-self: flex-end;
+  gap: 4px;
+}
+
+.newProjectFormButton__button {
+  background-color: var(--btn-blue);
+}
+
 /* ============================ */
 
 /* COMMON */
+.button-common {
+  border: 0;
+  border-radius: 4px;
+  color: var(--clr-white);
+  cursor: pointer;
+  font-size: 0.675rem;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
 .flex-row {
   display: flex;
   align-items: center;
@@ -95,10 +165,6 @@ nav {
 .flex-column {
   display: flex;
   flex-direction: column;
-}
-
-.padding-box {
-  padding: 12px 24px;
 }
 
 .list-item {
@@ -112,6 +178,10 @@ nav {
 
 .list-icon {
   height: 16px;
+}
+
+.padding-box {
+  padding: 12px 24px;
 }
 
 /* HIDDEN */
