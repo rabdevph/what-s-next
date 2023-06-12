@@ -27,21 +27,21 @@
           <ul class="navList">
             <li
               class="navList__item list-item flex-row padding-box"
-              id="todayList"
+              id="today-list"
             >
               <img src="../src/assets/today.svg" class="list-icon" />
               <p class="list-text">TODAY</p>
             </li>
             <li
               class="navList__item list-item flex-row padding-box"
-              id="upcomingList"
+              id="upcoming-list"
             >
               <img src="../src/assets/week.svg" class="list-icon" />
               <p class="list-text">UPCOMING</p>
             </li>
             <li
               class="navList__item list-item flex-row padding-box"
-              id="personalList"
+              id="personal-list"
               data-id="PERSONAL"
             >
               <img src="../src/assets/project.svg" class="list-icon" />
@@ -52,7 +52,7 @@
           <!-- projects header -->
           <p class="projectsHeader padding-box">PROJECTS</p>
 
-          <ul class="projectsNavList" id="projectsNavList">
+          <ul class="projectsNavList" id="projects-nav-list">
             <!-- project navigation -->
           </ul>
 
@@ -61,7 +61,7 @@
             <!-- new project button -->
             <button
               class="newProjectButton list-item flex-row padding-box"
-              id="newProjectButton"
+              id="new-project-button"
             >
               <img
                 src="../src/assets/plus-circle.svg"
@@ -71,11 +71,14 @@
             </button>
 
             <!-- new project form -->
-            <form class="newProjectForm padding-box hidden" id="newProjectForm">
+            <form
+              class="newProjectForm padding-box hidden"
+              id="new-project-form"
+            >
               <!-- input type text -->
               <input
                 class="newProjectForm__input"
-                id="newProjectName"
+                id="new-project-name"
                 type="text"
                 placeholder="Enter project name"
                 autocomplete="off"
@@ -86,7 +89,7 @@
               <div class="newProjectFormButton flex-row">
                 <input
                   class="newProjectFormButton__button button-common"
-                  id="cancelNewProject"
+                  id="cancel-new-project"
                   type="button"
                   value="CANCEL"
                   tabindex="-1"
@@ -104,7 +107,8 @@
           </section>
         </nav>
       </aside>
-      <section class="taskSection" id="taskSection"></section>
+      <!-- TASK -->
+      <section class="taskSection" id="task-section"></section>
     </main>
   </body>
 </html>

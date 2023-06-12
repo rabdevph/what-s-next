@@ -11,7 +11,7 @@ import {
 import { PERSONALPROJECT } from './utilities/helper';
 
 console.log('Hello World!');
-const projectsNavList = document.getElementById('projectsNavList');
+const projectsNavList = document.getElementById('projects-nav-list');
 ProjectNavItems(projectsNavList);
 
 // this will create a PERSONAL default project for new users

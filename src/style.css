@@ -146,6 +146,11 @@ nav {
   background-color: var(--btn-blue);
 }
 
+/* TASK */
+.taskSection {
+  padding: 32px;
+}
+
 /* ============================ */
 
 /* COMMON */

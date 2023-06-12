@@ -11,9 +11,9 @@ import createProject from './todo';
 
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
 export function clickNavListItems() {
-  const newProjectButton = document.getElementById('newProjectButton');
-  const newProjectForm = document.getElementById('newProjectForm');
-  const newProjectName = document.getElementById('newProjectName');
+  const newProjectButton = document.getElementById('new-project-button');
+  const newProjectForm = document.getElementById('new-project-form');
+  const newProjectName = document.getElementById('new-project-name');
   const navListItems = document.querySelectorAll('.navList__item');
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
@@ -29,13 +29,20 @@ export function clickNavListItems() {
 }
 
 // PROJECTS NAVIGATION LIST
-export function clickProjectItems(item) {
-  const newProjectButton = document.getElementById('newProjectButton');
-  const newProjectForm = document.getElementById('newProjectForm');
-  const newProjectName = document.getElementById('newProjectName');
+export function clickProjectItems(projectItem, componentFunc) {
+  const newProjectButton = document.getElementById('new-project-button');
+  const newProjectForm = document.getElementById('new-project-form');
+  const newProjectName = document.getElementById('new-project-name');
 
-  item.addEventListener('click', () => {
-    console.log(item.id);
+  projectItem.addEventListener('click', () => {
+    const taskSection = document.getElementById('task-section');
+
+    const projectDataId = projectItem.dataset.id;
+    console.log(projectItem.id);
+    console.log(projectDataId);
+
+    componentFunc(taskSection, projectDataId);
+
     removeHiddenClass(newProjectButton); // if hidden, show new project button
     addHiddenClass(newProjectForm); // if not hidden, hide new project form
     removeErrorBgClass(newProjectName); // if there's error, remove error class
@@ -45,8 +52,8 @@ export function clickProjectItems(item) {
 
 // NEW PROJECT BUTTON
 export function clickNewProject() {
-  const newProjectButton = document.getElementById('newProjectButton');
-  const newProjectForm = document.getElementById('newProjectForm');
+  const newProjectButton = document.getElementById('new-project-button');
+  const newProjectForm = document.getElementById('new-project-form');
 
   newProjectButton.addEventListener('click', () => {
     addHiddenClass(newProjectButton); // hide new project form
@@ -56,10 +63,10 @@ export function clickNewProject() {
 
 // CANCEL PROJECT BUTTON
 export function clickCancelProject() {
-  const cancelNewProject = document.getElementById('cancelNewProject');
-  const newProjectButton = document.getElementById('newProjectButton');
-  const newProjectForm = document.getElementById('newProjectForm');
-  const newProjectName = document.getElementById('newProjectName');
+  const cancelNewProject = document.getElementById('cancel-new-project');
+  const newProjectButton = document.getElementById('new-project-button');
+  const newProjectForm = document.getElementById('new-project-form');
+  const newProjectName = document.getElementById('new-project-name');
 
   cancelNewProject.addEventListener('click', (e) => {
     e.preventDefault();
@@ -73,9 +80,9 @@ export function clickCancelProject() {
 
 // NEW PROJECT FORM - SUBMIT
 export function sumbitNewProject(component, targetList) {
-  const newProjectName = document.getElementById('newProjectName');
-  const newProjectButton = document.getElementById('newProjectButton');
-  const newProjectForm = document.getElementById('newProjectForm');
+  const newProjectName = document.getElementById('new-project-name');
+  const newProjectButton = document.getElementById('new-project-button');
+  const newProjectForm = document.getElementById('new-project-form');
 
   newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -98,7 +105,7 @@ export function sumbitNewProject(component, targetList) {
 
 // NEW PROJECT NAME - INPUT - CLICK
 export function clickNewProjectName() {
-  const newProjectName = document.getElementById('newProjectName');
+  const newProjectName = document.getElementById('new-project-name');
 
   newProjectName.addEventListener('click', () => {
     removeErrorBgClass(newProjectName);
@@ -107,7 +114,7 @@ export function clickNewProjectName() {
 
 // NEW PROJECT NAME - INPUT - INPUT
 export function inputNewProjectName() {
-  const newProjectName = document.getElementById('newProjectName');
+  const newProjectName = document.getElementById('new-project-name');
 
   newProjectName.addEventListener('input', () => {
     removeErrorBgClass(newProjectName);

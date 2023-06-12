@@ -1,3 +1,5 @@
+import Task from './TaskSection';
+
 import { getProjectNames } from '../utilities/data';
 import { clearContent } from '../utilities/controls';
 import { clickProjectItems } from '../utilities/events';
@@ -14,7 +16,7 @@ export default function ProjectNavItems(targetList) {
       // create a list element for each project
       const item = document.createElement('li');
       item.classList.add('list-item', 'flex-row', 'padding-box');
-      item.setAttribute('id', `${project.toLowerCase()}List`);
+      item.setAttribute('id', `${project.toLowerCase()}-list`);
       item.setAttribute('data-id', project);
 
       const icon = document.createElement('img');
@@ -28,7 +30,8 @@ export default function ProjectNavItems(targetList) {
       item.appendChild(icon);
       item.appendChild(text);
 
-      clickProjectItems(item); // click event handler
+      const projectItem = item;
+      clickProjectItems(projectItem, Task); // click event handler
 
       targetList.appendChild(item);
     }
