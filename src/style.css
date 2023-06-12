@@ -13,8 +13,12 @@
   --clr-white: #ffffff;
   --clr-dark-zinc: #27272a;
   --clr-light-zinc: #3f3f46;
+  --clr-gray: #111827;
 
   --btn-blue: #2563eb;
+  --btn-green: #22c55e;
+  --btn-yellow: #eab308;
+  --btn-red: #ef4444;
 
   --bg-error: #fecaca;
 }
@@ -149,9 +153,134 @@ nav {
 /* TASK */
 .taskSection {
   padding: 32px;
+  gap: 12px;
 }
 
-/* ============================ */
+/* --------- */
+/* TASK FORM */
+/* --------- */
+
+/* form */
+.taskForm {
+  gap: 12px;
+  font-size: 0.75rem;
+}
+
+/* input */
+.taskInputWrapper {
+  border: 1px solid;
+  border-radius: 4px;
+  gap: 6px;
+  padding: 8px;
+}
+
+.taskForm__input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+}
+
+/* date, priority, buttons wrapper */
+.taskFormControls {
+  gap: 24px;
+}
+
+/* date */
+.taskDateWrapper {
+  gap: 8px;
+}
+
+.taskDate__input {
+  border: 1px solid var(--clr-gray);
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 0.675rem;
+  outline: 0;
+  padding: 2px 4px;
+}
+
+/* priority */
+.taskPriorityWrapper {
+  gap: 8px;
+}
+
+.taskPriorityButtonWrapper {
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+.taskPriority__button {
+  border: 0;
+  outline: 0;
+  color: var(--clr-white);
+  cursor: pointer;
+  font-size: 0.675rem;
+  font-weight: bold;
+  opacity: 0.5;
+  padding: 4px 8px;
+}
+
+.taskPriority__button--selected {
+  opacity: 1;
+}
+
+.taskPriority__button:hover {
+  opacity: 0.7;
+}
+
+.taskPriority__button:focus {
+  opacity: 1;
+}
+
+.taskPriority__button--low {
+  background-color: var(--btn-green);
+}
+
+.taskPriority__button--medium {
+  background-color: var(--btn-yellow);
+}
+
+.taskPriority__button--high {
+  background-color: var(--btn-red);
+}
+
+/* form buttons */
+.taskButtonWrapper {
+  margin-left: auto;
+  gap: 4px;
+}
+
+.taskButton {
+  background-color: var(--btn-blue);
+  outline: 0;
+}
+
+/* --------------- */
+/* ADD TASK BUTTON */
+/* --------------- */
+
+.addTask__button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  gap: 4px;
+  outline: 0;
+  opacity: 0.5;
+}
+
+.addTask__button:hover {
+  opacity: 0.8;
+}
+
+.addTask__button:focus {
+  opacity: 1;
+}
+
+.addTask__icon {
+  height: 18px;
+}
+
+/* ==================== */
 
 /* COMMON */
 .button-common {

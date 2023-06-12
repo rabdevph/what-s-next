@@ -3,11 +3,14 @@ import {
   addErrorBgClass,
   removeErrorBgClass,
   removeHiddenClass,
+  togglePrioritySelectedClass,
   clearInput,
 } from './controls';
 import { saveToStorage } from './data';
-import { isProjectExisting } from './helper';
+import { isProjectExisting, getSelectedPriority } from './helper';
 import createProject from './todo';
+
+const SELECTEDPRIORITY = []; // array for priority value
 
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
 export function clickNavListItems() {
@@ -118,5 +121,14 @@ export function inputNewProjectName() {
 
   newProjectName.addEventListener('input', () => {
     removeErrorBgClass(newProjectName);
+  });
+}
+
+export function clickPriority(element, elementWrapper) {
+  element.addEventListener('click', () => {
+    SELECTEDPRIORITY.splice(0); // clear array every click to store only one value
+    SELECTEDPRIORITY.push(getSelectedPriority(element)); // get priority value then save to array
+    console.log(SELECTEDPRIORITY[0]);
+    togglePrioritySelectedClass(element, elementWrapper);
   });
 }

@@ -11,6 +11,11 @@ export function isProjectExisting(name) {
   return false;
 }
 
+export function getSelectedPriority(element) {
+  const priorityValue = element.getAttribute('data-priority');
+  return priorityValue;
+}
+
 // CREATE 'PERSONAL' PROJECT FOR NEW USERS
 export function PERSONALPROJECT() {
   const projectName = 'PERSONAL';

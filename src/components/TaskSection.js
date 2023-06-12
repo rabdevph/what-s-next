@@ -23,12 +23,13 @@ function AddTask() {
   wrapper.classList.add('addTaskWrapper', 'flex-row');
 
   const button = document.createElement('button');
-  button.classList.add('addTask__button');
+  button.classList.add('addTask__button', 'flex-row');
   button.setAttribute('id', 'add-task');
   button.setAttribute('tabindex', '-1');
 
   const buttonIcon = document.createElement('img');
   buttonIcon.classList.add('addTask__icon');
+  buttonIcon.src = '../src/assets/plus.svg';
   button.appendChild(buttonIcon);
 
   const buttonText = document.createElement('p');

@@ -1,33 +1,38 @@
 import { format } from 'date-fns';
 
+import { clickPriority } from '../utilities/events';
+
 // TEXT AREA
 function TaskInput() {
-  const textArea = document.createElement('textarea');
-  textArea.classList.add('taskForm__input');
-  textArea.setAttribute('id', 'task-input');
-  textArea.setAttribute('placeholder', 'Enter your task here');
-  textArea.setAttribute('tabindex', '-1');
-  textArea.setAttribute('autocomplete', 'off');
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('taskInputWrapper', 'flex-row');
 
-  return textArea;
+  const text = document.createElement('input');
+  text.classList.add('taskForm__input');
+  text.setAttribute('id', 'task-input');
+  text.setAttribute('type', 'text');
+  text.setAttribute('placeholder', 'Enter your task here');
+  text.setAttribute('tabindex', '-1');
+  text.setAttribute('autocomplete', 'off');
+
+  wrapper.appendChild(text);
+
+  return wrapper;
 }
 
 // CONTROLS
 function TaskControls() {
   const wrapper = document.createElement('div');
-  wrapper.classList.add('taskFormControls');
+  wrapper.classList.add('taskFormControls', 'flex-row');
 
   // date
   const dateWrapper = document.createElement('div');
   dateWrapper.classList.add('taskDateWrapper', 'flex-row');
 
-  const dateError = document.createElement('span');
-  dateError.setAttribute('id', 'date-error');
-
   const dateLabel = document.createElement('p');
   dateLabel.classList.add('taskDate__label');
   dateLabel.textContent = ' Due Date:';
-  dateLabel.insertBefore(dateError, dateLabel.firstChild); // insert span before Due Date
+
   dateWrapper.appendChild(dateLabel); // add to wrapper
 
   const today = new Date();
@@ -40,21 +45,21 @@ function TaskControls() {
   date.setAttribute('min', minDate);
   date.setAttribute('value', minDate);
   date.setAttribute('tabindex', '-1');
+
   dateWrapper.appendChild(date); // add to wrapper
 
   // priority
   const priorityWrapper = document.createElement('div');
   priorityWrapper.classList.add('taskPriorityWrapper', 'flex-row');
 
-  const taskError = document.createElement('span');
-  taskError.setAttribute('id', 'task-error');
+  const priorityLabel = document.createElement('p');
+  priorityLabel.classList.add('taskPriority__label');
+  priorityLabel.textContent = ' Priority:';
 
-  const taskLabel = document.createElement('p');
-  taskLabel.classList.add('taskPriority__label');
-  taskLabel.textContent = ' Priority:';
-  taskLabel.insertBefore(taskError, taskLabel.firstChild); // insert span before Priority
+  priorityWrapper.appendChild(priorityLabel); // add to date wrapper
 
-  priorityWrapper.appendChild(taskLabel); // add to date wrapper
+  const priorityButtonWrapper = document.createElement('div');
+  priorityButtonWrapper.classList.add('taskPriorityButtonWrapper', 'flex-row');
 
   const options = [
     { value: 'low', label: 'Low' },
@@ -66,16 +71,21 @@ function TaskControls() {
     const button = document.createElement('input');
     button.classList.add(
       `taskPriority__button`,
-      `taskPriority__button--${option.value}`,
-      'button-common'
+      `taskPriority__button--${option.value}`
+      // 'button-common'
     );
     button.setAttribute('id', `${option.value}-priority-button`);
     button.setAttribute('type', 'button');
     button.setAttribute('value', `${option.label.toUpperCase()}`);
     button.setAttribute('tabindex', '-1');
+    button.setAttribute('data-priority', option.value); // data-priority
 
-    priorityWrapper.appendChild(button); // add to priority wrapper
+    priorityButtonWrapper.appendChild(button); // add to priority wrapper
+
+    clickPriority(button, priorityButtonWrapper);
   });
+
+  priorityWrapper.appendChild(priorityButtonWrapper);
 
   // cancel and save
   const taskButtonWrapper = document.createElement('div');
@@ -107,17 +117,12 @@ function TaskControls() {
 
 // FORM
 export default function TaskForm() {
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('taskFormWrapper');
-
   const form = document.createElement('form');
-  form.classList.add('taskForm');
+  form.classList.add('taskForm', 'flex-column');
   form.setAttribute('id', 'task-form');
 
   form.appendChild(TaskInput()); // add text area to form
   form.appendChild(TaskControls()); // add task controls - date, priority, buttons
 
-  wrapper.appendChild(form); // add form to wrapper
-
-  return wrapper;
+  return form;
 }
