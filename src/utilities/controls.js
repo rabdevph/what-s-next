@@ -1,8 +1,12 @@
-export function toggleHiddenClass(element) {
+export function addHiddenClass(element) {
+  if (!element.classList.contains('hidden')) {
+    element.classList.add('hidden');
+  }
+}
+
+export function removeHiddenClass(element) {
   if (element.classList.contains('hidden')) {
     element.classList.remove('hidden');
-  } else {
-    element.classList.add('hidden');
   }
 }
 

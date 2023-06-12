@@ -1,7 +1,8 @@
 import {
-  toggleHiddenClass,
+  addHiddenClass,
   addErrorBgClass,
   removeErrorBgClass,
+  removeHiddenClass,
   clearInput,
 } from './controls';
 import { saveToStorage } from './data';
@@ -10,19 +11,35 @@ import createProject from './todo';
 
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
 export function clickNavListItems() {
+  const newProjectButton = document.getElementById('newProjectButton');
+  const newProjectForm = document.getElementById('newProjectForm');
+  const newProjectName = document.getElementById('newProjectName');
   const navListItems = document.querySelectorAll('.navList__item');
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
       //
       console.log(navListItem.id);
+
+      removeHiddenClass(newProjectButton);
+      addHiddenClass(newProjectForm);
+      removeErrorBgClass(newProjectName);
+      clearInput(newProjectName);
     });
   });
 }
 
 // PROJECTS NAVIGATION LIST
 export function clickProjectItems(item) {
+  const newProjectButton = document.getElementById('newProjectButton');
+  const newProjectForm = document.getElementById('newProjectForm');
+  const newProjectName = document.getElementById('newProjectName');
+
   item.addEventListener('click', () => {
     console.log(item.id);
+    removeHiddenClass(newProjectButton); // if hidden, show new project button
+    addHiddenClass(newProjectForm); // if not hidden, hide new project form
+    removeErrorBgClass(newProjectName); // if there's error, remove error class
+    clearInput(newProjectName); // clear input
   });
 }
 
@@ -32,8 +49,8 @@ export function clickNewProject() {
   const newProjectForm = document.getElementById('newProjectForm');
 
   newProjectButton.addEventListener('click', () => {
-    toggleHiddenClass(newProjectForm); // hide new project form
-    toggleHiddenClass(newProjectButton); // show new project button
+    addHiddenClass(newProjectButton); // hide new project form
+    removeHiddenClass(newProjectForm); // show new project button
   });
 }
 
@@ -47,8 +64,8 @@ export function clickCancelProject() {
   cancelNewProject.addEventListener('click', (e) => {
     e.preventDefault();
 
-    toggleHiddenClass(newProjectForm); // hide new project form
-    toggleHiddenClass(newProjectButton); // show new project button
+    addHiddenClass(newProjectForm); // hide new project form
+    removeHiddenClass(newProjectButton); // show new project button
     removeErrorBgClass(newProjectName); // remove bg error when closed
     clearInput(newProjectName); // clear text
   });
@@ -71,8 +88,8 @@ export function sumbitNewProject(component, targetList) {
     } else {
       const project = createProject(projectName.toUpperCase()); // create project
       saveToStorage(project.name, project); // save to localStorage
-      toggleHiddenClass(newProjectForm); // hide new project form
-      toggleHiddenClass(newProjectButton); // show new project button
+      addHiddenClass(newProjectForm); // hide new project form
+      removeHiddenClass(newProjectButton); // show new project button
       clearInput(newProjectName); // clear text
       component(targetList); // ProjectNavItems(projectsNavList) - load newly added project
     }
