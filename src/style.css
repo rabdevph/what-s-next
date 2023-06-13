@@ -14,6 +14,7 @@
   --clr-dark-zinc: #27272a;
   --clr-light-zinc: #3f3f46;
   --clr-gray: #6b7280;
+  --clr-light-gray: #f4f4f5;
 
   --clr-blue: #2563eb;
   --clr-green: #22c55e;
@@ -152,7 +153,7 @@ nav {
 
 /* TASK */
 .taskSection {
-  background-color: #f4f4f5;
+  background-color: var(--clr-light-gray);
   padding: 32px;
   gap: 12px;
 }
@@ -280,15 +281,17 @@ nav {
 /* --------- */
 
 .taskList {
+  background-color: white;
   list-style-type: none;
-  padding-top: 12px;
-  gap: 12px;
+  margin-top: 12px;
+  padding: 2px 0;
+  gap: 2px;
 }
 
 .taskItem {
-  background-color: var(--clr-white);
-  border: 1px solid var(--clr-dark-zinc);
-  border-radius: 6px;
+  background-color: var(--clr-light-gray);
+  /* border: 1px solid var(--clr-dark-zinc);
+  border-radius: 6px; */
   padding: 12px 16px;
   display: grid;
   align-items: center;
@@ -301,13 +304,14 @@ nav {
   -moz-appearance: none;
   width: 12px;
   height: 12px;
-  border: 2px solid #000;
+  border: 1px solid var(--clr-dark-zinc);
   border-radius: 8px;
+  cursor: pointer;
   outline: none;
 }
 
 .taskItem__checkbox:checked {
-  background-color: #000;
+  background-color: var(--clr-gray);
 }
 
 .taskItem__description {
@@ -376,6 +380,11 @@ nav {
 
 .padding-box {
   padding: 12px 24px;
+}
+
+/* TASK STATUS */
+.completed-status {
+  text-decoration: line-through;
 }
 
 /* PRIORITY  */

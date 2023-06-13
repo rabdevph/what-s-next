@@ -156,7 +156,7 @@ export function submitTaskForm(project, reloadTaskComponent, taskSection) {
   const input = document.getElementById('task-input');
   const taskDate = document.getElementById('task-date');
   const priorityWrapper = document.getElementById('priority-wrapper');
-  const priorityButtons = document.querySelectorAll('.taskPriority__button');
+  // const priorityButtons = document.querySelectorAll('.taskPriority__button');
 
   form.addEventListener('submit', (e) => {
     const task = input.value;
@@ -191,7 +191,7 @@ export function submitTaskForm(project, reloadTaskComponent, taskSection) {
 
       SELECTEDPRIORITY.splice(0);
 
-      // reload
+      // reload task section - Task(taskSection, projectName)
       reloadTaskComponent(taskSection, project.name);
     }
   });
@@ -237,5 +237,32 @@ export function clickAddTask() {
   addTask.addEventListener('click', () => {
     removeHiddenClass(form);
     addHiddenClass(addTaskWrapper);
+  });
+}
+
+// TASK CHECK BOX
+export function checkTask(project, reloadTaskComponent, taskSection) {
+  const taskCheckBoxes = document.querySelectorAll('.taskItem__checkbox');
+
+  taskCheckBoxes.forEach((taskCheckbox, taskIndex) => {
+    // const taskItemDescription = document.querySelector(
+    //   `.taskItem${taskIndex}__description`
+    // );
+
+    taskCheckbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        // change status to completed
+        project.changeTaskStatus(taskIndex); // change status
+        saveToStorage(project.name, project); // save or update localStorage
+        // reload task section
+        reloadTaskComponent(taskSection, project.name);
+      } else {
+        // change status to pending
+        project.changeTaskStatus(taskIndex); // change status
+        saveToStorage(project.name, project); // save or update localStorage
+        // reload task section - Task(taskSection, projectName)
+        reloadTaskComponent(taskSection, project.name);
+      }
+    });
   });
 }

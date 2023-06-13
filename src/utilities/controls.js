@@ -71,6 +71,18 @@ export function addPriorityColorClass(wrapperElement, priority) {
   }
 }
 
+export function checkTaskStatus(status, checkBox, description) {
+  if (status === 'completed') {
+    // checkbox = checked
+    const taskCheckbox = checkBox;
+    taskCheckbox.checked = true;
+
+    // task = line through
+    const taskDescription = description;
+    taskDescription.classList.add('completed-status');
+  }
+}
+
 export function clearInput(targetElement) {
   const element = targetElement;
   element.value = '';

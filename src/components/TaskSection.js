@@ -1,12 +1,17 @@
 import TaskForm from './TaskForm';
 
-import { clearContent, addPriorityColorClass } from '../utilities/controls';
+import {
+  clearContent,
+  addPriorityColorClass,
+  checkTaskStatus,
+} from '../utilities/controls';
 import {
   submitTaskForm,
   clickTaskInput,
   clickPriority,
   clickCancelTask,
   clickAddTask,
+  checkTask,
 } from '../utilities/events';
 import { deserializedProject } from '../utilities/helper';
 
@@ -51,18 +56,30 @@ function AddTask() {
   return wrapper;
 }
 
-// TASK LIST
-function TaskList(project) {
+export default function Task(taskSection, projectName) {
+  // taskSection = <section> </section>
+  clearContent(taskSection);
+
+  // re-create project object
+  const project = deserializedProject(projectName);
+
+  taskSection.appendChild(TaskHeader(projectName));
+  taskSection.appendChild(TaskForm());
+  taskSection.appendChild(AddTask());
+
+  // task list
   const list = document.createElement('ul');
   list.classList.add('taskList', 'flex-column');
 
+  // get task from project
   const projectTasks = project.tasks;
 
   if (projectTasks.length !== 0) {
     // if task is not empty, display the tasks.
     projectTasks.forEach((projectTask, projectTaskIndex) => {
       const item = document.createElement('li');
-      item.classList.add('taskItem');
+      item.classList.add('taskItem', `taskItem${projectTaskIndex}`);
+      item.setAttribute('data-task-no', projectTaskIndex);
 
       // task checkbox
       const checkBox = document.createElement('input');
@@ -72,8 +89,16 @@ function TaskList(project) {
 
       // task description
       const description = document.createElement('p');
-      description.classList.add('taskItem__description');
+      description.classList.add(
+        'taskItem__description',
+        `taskItem${projectTaskIndex}__description`
+      );
       description.textContent = projectTask.description;
+
+      const taskStatus = project.getTaskStatus(projectTaskIndex);
+      console.log(taskStatus);
+
+      checkTaskStatus(taskStatus, checkBox, description);
 
       // task due icon and date
       const due = document.createElement('div');
@@ -105,26 +130,13 @@ function TaskList(project) {
     });
   }
 
-  return list;
-}
-
-export default function Task(taskSection, projectName) {
-  // taskSection = <section> </section>
-  clearContent(taskSection);
-
-  // re-create project object
-  const project = deserializedProject(projectName);
-  console.log(project);
-
-  taskSection.appendChild(TaskHeader(projectName));
-  taskSection.appendChild(TaskForm());
-  taskSection.appendChild(AddTask());
-  taskSection.appendChild(TaskList(project)); // pass project object
+  taskSection.appendChild(list);
 
   // event handlers
-  submitTaskForm(project, Task, taskSection); // pass re-created project object here
+  submitTaskForm(project, Task, taskSection); //
   clickTaskInput();
   clickPriority();
   clickCancelTask();
   clickAddTask();
+  checkTask(project, Task, taskSection);
 }

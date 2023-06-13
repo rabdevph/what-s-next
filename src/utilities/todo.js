@@ -15,14 +15,18 @@ export default function createProject(name) {
     name,
     tasks: [],
 
-    addTask(description, dueDate, priority, status = 'Pending') {
+    addTask(description, dueDate, priority, status = 'pending') {
       const newTask = createTask(description, dueDate, priority, status);
       this.tasks.push(newTask);
     },
 
     changeTaskStatus(index) {
       this.tasks[index].status =
-        this.tasks[index].status === 'Pending' ? 'Completed' : 'Pending';
+        this.tasks[index].status === 'pending' ? 'completed' : 'pending';
+    },
+
+    getTaskStatus(index) {
+      return this.tasks[index].status;
     },
 
     getTasks() {
