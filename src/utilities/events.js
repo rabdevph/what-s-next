@@ -47,14 +47,14 @@ export function clickProjectItems(projectItem, componentFunc) {
   projectItem.addEventListener('click', () => {
     const taskSection = document.getElementById('task-section');
 
-    const projectDataId = projectItem.dataset.id;
+    const projectName = projectItem.dataset.id;
     console.log(projectItem.id);
-    console.log(projectDataId);
+    console.log(projectName);
 
     SELECTEDPRIORITY.splice(0);
     console.log(SELECTEDPRIORITY); //
 
-    componentFunc(taskSection, projectDataId); // Task(taskSection, projectName)
+    componentFunc(taskSection, projectName); // Task(taskSection, projectName)
 
     removeHiddenClass(newProjectButton); // if hidden, show new project button
     addHiddenClass(newProjectForm); // if not hidden, hide new project form
@@ -151,7 +151,7 @@ export function clickPriority() {
 }
 
 // TASK FORM - SUBMIT
-export function submitTaskForm(project) {
+export function submitTaskForm(project, reloadTaskComponent, taskSection) {
   const form = document.getElementById('task-form');
   const input = document.getElementById('task-input');
   const taskDate = document.getElementById('task-date');
@@ -167,14 +167,14 @@ export function submitTaskForm(project) {
     e.preventDefault();
 
     console.log('Form submitted..');
-    if (!task || SELECTEDPRIORITY.length < 1) {
+    if (!task || SELECTEDPRIORITY.length === 0) {
       console.log('Form submission failed!');
       if (!task) {
         console.log('Task empty.');
         addErrorBorderClass(input);
       }
 
-      if (SELECTEDPRIORITY.length < 1) {
+      if (SELECTEDPRIORITY.length === 0) {
         console.log('No selected priority.');
         addErrorBorderClass(priorityWrapper);
       }
@@ -189,10 +189,10 @@ export function submitTaskForm(project) {
       project.addTask(task, dueDate, priority);
       saveToStorage(project.name, project);
 
-      // then clear elements class and value
       SELECTEDPRIORITY.splice(0);
-      clearInput(input);
-      removePrioritySelectedClass(priorityButtons);
+
+      // reload
+      reloadTaskComponent(taskSection, project.name);
     }
   });
 }
@@ -212,7 +212,7 @@ export function clickCancelTask() {
   const input = document.getElementById('task-input');
   const priorityWrapper = document.getElementById('priority-wrapper');
   const cancel = document.getElementById('cancel-task');
-  const addTask = document.getElementById('add-task');
+  const addTaskWrapper = document.getElementById('add-task-wrapper');
   const priorityButtons = document.querySelectorAll('.taskPriority__button');
 
   cancel.addEventListener('click', (e) => {
@@ -224,17 +224,18 @@ export function clickCancelTask() {
     removeErrorBorderClass(input);
     removeErrorBorderClass(priorityWrapper);
     addHiddenClass(form);
-    removeHiddenClass(addTask);
+    removeHiddenClass(addTaskWrapper);
   });
 }
 
 // ADD TASK BUTTON
 export function clickAddTask() {
   const form = document.getElementById('task-form');
+  const addTaskWrapper = document.getElementById('add-task-wrapper');
   const addTask = document.getElementById('add-task');
 
   addTask.addEventListener('click', () => {
     removeHiddenClass(form);
-    addHiddenClass(addTask);
+    addHiddenClass(addTaskWrapper);
   });
 }

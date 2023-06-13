@@ -5,7 +5,7 @@ function TaskInput() {
   const input = document.createElement('input');
   input.classList.add('taskForm__input');
   input.setAttribute('id', 'task-input');
-  input.setAttribute('type', 'text');
+  input.setAttribute('typewrapper', 'text');
   input.setAttribute('placeholder', 'Enter your task here');
   input.setAttribute('tabindex', '-1');
   input.setAttribute('autocomplete', 'off');
