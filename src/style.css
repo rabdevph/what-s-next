@@ -210,38 +210,33 @@ nav {
 }
 
 .taskPriority__button {
-  border: 0;
   outline: 0;
   color: var(--clr-white);
   cursor: pointer;
   font-size: 0.675rem;
   font-weight: bold;
   opacity: 0.5;
-  padding: 4px 8px;
+  padding: 2px 8px;
 }
-
-.taskPriority__button--selected {
-  opacity: 1;
-}
-
-/* .taskPriority__button:hover {
-  opacity: 0.7;
-} */
-
-/* .taskPriority__button:focus {
-  opacity: 1;
-} */
 
 .taskPriority__button--low {
   background-color: var(--btn-green);
+  border: 2px solid var(--btn-green);
 }
 
 .taskPriority__button--medium {
   background-color: var(--btn-yellow);
+  border: 2px solid var(--btn-yellow);
 }
 
 .taskPriority__button--high {
   background-color: var(--btn-red);
+  border: 2px solid var(--btn-red);
+}
+
+.taskPriority__button--selected {
+  opacity: 1;
+  border: 2px solid var(--clr-gray);
 }
 
 /* form buttons */

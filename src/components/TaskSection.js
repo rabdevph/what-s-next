@@ -8,6 +8,7 @@ import {
   clickCancelTask,
   clickAddTask,
 } from '../utilities/events';
+import { deserializedProject } from '../utilities/helper';
 
 // HEADER
 function TaskHeader(projectName) {
@@ -55,6 +56,10 @@ function TaskList() {}
 export default function Task(taskSection, projectDataId) {
   // taskSection = <section> </section>
   clearContent(taskSection);
+
+  // re-create project object
+  const getProject = deserializedProject(projectDataId);
+  console.log(getProject);
 
   taskSection.appendChild(TaskHeader(projectDataId));
   taskSection.appendChild(TaskForm());

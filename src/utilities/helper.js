@@ -1,5 +1,5 @@
 import createProject from './todo';
-import { saveToStorage, getProjectNames } from './data';
+import { saveToStorage, retrieveFromStorage, getProjectNames } from './data';
 
 export function isProjectExisting(name) {
   const projectNames = getProjectNames();
@@ -11,9 +11,17 @@ export function isProjectExisting(name) {
   return false;
 }
 
-export function getSelectedPriority(element) {
-  const priorityValue = element.getAttribute('data-priority');
+export function getSelectedPriority(button) {
+  const priorityValue = button.getAttribute('data-priority');
   return priorityValue;
+}
+
+export function deserializedProject(projectName) {
+  // retrieve project from localStorage
+  const project = retrieveFromStorage(projectName);
+  // recreate project to use methods inside it
+  const projectObject = Object.assign(createProject(), project);
+  return projectObject;
 }
 
 // CREATE 'PERSONAL' PROJECT FOR NEW USERS

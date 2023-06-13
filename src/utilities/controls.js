@@ -34,9 +34,9 @@ export function removeErrorBorderClass(element) {
   }
 }
 
-export function togglePrioritySelectedClass(element, elementWrapper) {
+export function addPrioritySelectedClass(button, buttonWrapper) {
   // remove 'priority__button--selected' class from previously selected button
-  const prevSelectedButton = elementWrapper.querySelector(
+  const prevSelectedButton = buttonWrapper.querySelector(
     '.taskPriority__button--selected'
   );
 
@@ -45,7 +45,16 @@ export function togglePrioritySelectedClass(element, elementWrapper) {
   }
 
   // add 'priority__button--selected' class to current button
-  element.classList.add('taskPriority__button--selected');
+  button.classList.add('taskPriority__button--selected');
+}
+
+export function removePrioritySelectedClass(buttons) {
+  //
+  buttons.forEach((button) => {
+    if (button.classList.contains('taskPriority__button--selected')) {
+      button.classList.remove('taskPriority__button--selected');
+    }
+  });
 }
 
 export function clearInput(targetElement) {

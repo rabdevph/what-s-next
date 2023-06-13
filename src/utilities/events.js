@@ -4,10 +4,11 @@ import {
   addErrorBgClass,
   addErrorBorderClass,
   addHiddenClass,
+  addPrioritySelectedClass,
   removeErrorBgClass,
   removeErrorBorderClass,
   removeHiddenClass,
-  togglePrioritySelectedClass,
+  removePrioritySelectedClass,
   clearInput,
 } from './controls';
 import { saveToStorage } from './data';
@@ -53,7 +54,7 @@ export function clickProjectItems(projectItem, componentFunc) {
     SELECTEDPRIORITY.splice(0);
     console.log(SELECTEDPRIORITY); //
 
-    componentFunc(taskSection, projectDataId);
+    componentFunc(taskSection, projectDataId); // Task(taskSection, projectName)
 
     removeHiddenClass(newProjectButton); // if hidden, show new project button
     addHiddenClass(newProjectForm); // if not hidden, hide new project form
@@ -143,7 +144,7 @@ export function clickPriority() {
       SELECTEDPRIORITY.splice(0); // clear array every click to store only one value
       SELECTEDPRIORITY.push(getSelectedPriority(priorityButton)); // get priority value then save to array
       console.log(`Priority: ${SELECTEDPRIORITY[0]}`);
-      togglePrioritySelectedClass(priorityButton, priorityButtonWrapper);
+      addPrioritySelectedClass(priorityButton, priorityButtonWrapper);
       removeErrorBorderClass(priorityButtonWrapper);
     });
   });
@@ -153,8 +154,9 @@ export function clickPriority() {
 export function submitTaskForm() {
   const form = document.getElementById('task-form');
   const input = document.getElementById('task-input');
-  const priorityWrapper = document.getElementById('priority-wrapper');
   const taskDate = document.getElementById('task-date');
+  const priorityWrapper = document.getElementById('priority-wrapper');
+  const priorityButtons = document.querySelectorAll('.taskPriority__button');
 
   form.addEventListener('submit', (e) => {
     const inputValue = input.value;
@@ -181,6 +183,11 @@ export function submitTaskForm() {
       console.log(`Task: ${inputValue}`);
       console.log(`Date: ${formattedDate}`);
       console.log(`Priority: ${SELECTEDPRIORITY[0]}`);
+
+      // then clear elements class and value
+      SELECTEDPRIORITY.splice(0);
+      clearInput(input);
+      removePrioritySelectedClass(priorityButtons);
     }
   });
 }
@@ -201,10 +208,13 @@ export function clickCancelTask() {
   const priorityWrapper = document.getElementById('priority-wrapper');
   const cancel = document.getElementById('cancel-task');
   const addTask = document.getElementById('add-task');
+  const priorityButtons = document.querySelectorAll('.taskPriority__button');
+
   cancel.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('clicked cancel, hide form');
     SELECTEDPRIORITY.splice(0);
+    removePrioritySelectedClass(priorityButtons);
     clearInput(input);
     removeErrorBorderClass(input);
     removeErrorBorderClass(priorityWrapper);
