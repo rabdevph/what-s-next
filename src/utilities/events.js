@@ -1,7 +1,11 @@
+import { format } from 'date-fns';
+
 import {
-  addHiddenClass,
   addErrorBgClass,
+  addErrorBorderClass,
+  addHiddenClass,
   removeErrorBgClass,
+  removeErrorBorderClass,
   removeHiddenClass,
   togglePrioritySelectedClass,
   clearInput,
@@ -20,8 +24,10 @@ export function clickNavListItems() {
   const navListItems = document.querySelectorAll('.navList__item');
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
-      //
-      console.log(navListItem.id);
+      console.log(navListItem.id); //
+
+      SELECTEDPRIORITY.splice(0);
+      console.log(SELECTEDPRIORITY); //
 
       removeHiddenClass(newProjectButton);
       addHiddenClass(newProjectForm);
@@ -43,6 +49,9 @@ export function clickProjectItems(projectItem, componentFunc) {
     const projectDataId = projectItem.dataset.id;
     console.log(projectItem.id);
     console.log(projectDataId);
+
+    SELECTEDPRIORITY.splice(0);
+    console.log(SELECTEDPRIORITY); //
 
     componentFunc(taskSection, projectDataId);
 
@@ -124,11 +133,63 @@ export function inputNewProjectName() {
   });
 }
 
-export function clickPriority(element, elementWrapper) {
-  element.addEventListener('click', () => {
-    SELECTEDPRIORITY.splice(0); // clear array every click to store only one value
-    SELECTEDPRIORITY.push(getSelectedPriority(element)); // get priority value then save to array
-    console.log(SELECTEDPRIORITY[0]);
-    togglePrioritySelectedClass(element, elementWrapper);
+// PRIORITY BUTTONS
+export function clickPriority() {
+  const priorityButtonWrapper = document.getElementById('priority-wrapper');
+  const priorityButtons = document.querySelectorAll('.taskPriority__button');
+
+  priorityButtons.forEach((priorityButton) => {
+    priorityButton.addEventListener('click', () => {
+      SELECTEDPRIORITY.splice(0); // clear array every click to store only one value
+      SELECTEDPRIORITY.push(getSelectedPriority(priorityButton)); // get priority value then save to array
+      console.log(`Priority: ${SELECTEDPRIORITY[0]}`);
+      togglePrioritySelectedClass(priorityButton, priorityButtonWrapper);
+      removeErrorBorderClass(priorityButtonWrapper);
+    });
+  });
+}
+
+// TASK FORM - SUBMIT
+export function submitTaskForm() {
+  const form = document.getElementById('task-form');
+  const input = document.getElementById('task-input');
+  const priorityWrapper = document.getElementById('priority-wrapper');
+  const taskDate = document.getElementById('task-date');
+
+  form.addEventListener('submit', (e) => {
+    const inputValue = input.value;
+    const selectedDate = new Date(taskDate.value);
+    const formattedDate = format(selectedDate, 'MMMM d, yyyy');
+
+    e.preventDefault();
+
+    console.log('Form submitted..');
+    if (!inputValue || SELECTEDPRIORITY.length < 1) {
+      console.log('Form submission failed!');
+      if (!inputValue) {
+        console.log('Task empty.');
+        addErrorBorderClass(input);
+      }
+
+      if (SELECTEDPRIORITY.length < 1) {
+        console.log('No selected priority.');
+        addErrorBorderClass(priorityWrapper);
+      }
+    } else {
+      // save task here
+      console.log('Form submission successful!');
+      console.log(`Task: ${inputValue}`);
+      console.log(`Date: ${formattedDate}`);
+      console.log(`Priority: ${SELECTEDPRIORITY[0]}`);
+    }
+  });
+}
+
+// TASK INPUT
+export function clickTaskInput() {
+  const input = document.getElementById('task-input');
+
+  input.addEventListener('click', () => {
+    removeErrorBorderClass(input);
   });
 }

@@ -13,14 +13,15 @@
   --clr-white: #ffffff;
   --clr-dark-zinc: #27272a;
   --clr-light-zinc: #3f3f46;
-  --clr-gray: #111827;
+  --clr-gray: #6b7280;
 
   --btn-blue: #2563eb;
   --btn-green: #22c55e;
   --btn-yellow: #eab308;
   --btn-red: #ef4444;
 
-  --bg-error: #fecaca;
+  /* --clr-error: #fecaca; */
+  --clr-error: #f87171;
 }
 
 *,
@@ -162,21 +163,19 @@ nav {
 
 /* form */
 .taskForm {
+  color: var(--clr-gray);
   gap: 12px;
   font-size: 0.75rem;
 }
 
 /* input */
-.taskInputWrapper {
-  border: 1px solid;
-  border-radius: 4px;
-  gap: 6px;
-  padding: 8px;
-}
-
 .taskForm__input {
   flex: 1;
-  border: 0;
+  border: 2px solid var(--clr-gray);
+  border-radius: 4px;
+  color: inherit;
+  gap: 6px;
+  padding: 8px;
   outline: 0;
 }
 
@@ -191,8 +190,9 @@ nav {
 }
 
 .taskDate__input {
-  border: 1px solid var(--clr-gray);
+  border: 2px solid var(--clr-gray);
   border-radius: 2px;
+  color: inherit;
   font-family: inherit;
   font-size: 0.675rem;
   outline: 0;
@@ -205,7 +205,7 @@ nav {
 }
 
 .taskPriorityButtonWrapper {
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 2px;
 }
 
@@ -224,13 +224,13 @@ nav {
   opacity: 1;
 }
 
-.taskPriority__button:hover {
+/* .taskPriority__button:hover {
   opacity: 0.7;
-}
+} */
 
-.taskPriority__button:focus {
+/* .taskPriority__button:focus {
   opacity: 1;
-}
+} */
 
 .taskPriority__button--low {
   background-color: var(--btn-green);
@@ -322,7 +322,11 @@ nav {
 
 /* ERROR BG COLOR */
 .error-bg {
-  background-color: var(--bg-error);
+  background-color: var(--clr-error);
+}
+
+.error-border {
+  border: 2px solid var(--clr-error);
 }
 
 /* HIDDEN */

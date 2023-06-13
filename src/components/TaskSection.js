@@ -1,6 +1,11 @@
 import TaskForm from './TaskForm';
 
 import { clearContent } from '../utilities/controls';
+import {
+  submitTaskForm,
+  clickTaskInput,
+  clickPriority,
+} from '../utilities/events';
 
 // HEADER
 function TaskHeader(projectName) {
@@ -53,5 +58,8 @@ export default function Task(taskSection, projectDataId) {
   taskSection.appendChild(TaskForm());
   taskSection.appendChild(AddTask());
 
-  return taskSection;
+  // event handlers
+  submitTaskForm();
+  clickTaskInput();
+  clickPriority();
 }

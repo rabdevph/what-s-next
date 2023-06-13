@@ -22,6 +22,18 @@ export function removeErrorBgClass(element) {
   }
 }
 
+export function addErrorBorderClass(element) {
+  if (!element.classList.contains('error-border')) {
+    element.classList.add('error-border');
+  }
+}
+
+export function removeErrorBorderClass(element) {
+  if (element.classList.contains('error-border')) {
+    element.classList.remove('error-border');
+  }
+}
+
 export function togglePrioritySelectedClass(element, elementWrapper) {
   // remove 'priority__button--selected' class from previously selected button
   const prevSelectedButton = elementWrapper.querySelector(
@@ -30,10 +42,10 @@ export function togglePrioritySelectedClass(element, elementWrapper) {
 
   if (prevSelectedButton) {
     prevSelectedButton.classList.remove('taskPriority__button--selected');
-  } else {
-    // add 'priority__button--selected' class to current button
-    element.classList.add('taskPriority__button--selected');
   }
+
+  // add 'priority__button--selected' class to current button
+  element.classList.add('taskPriority__button--selected');
 }
 
 export function clearInput(targetElement) {

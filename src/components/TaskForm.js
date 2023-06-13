@@ -1,23 +1,16 @@
 import { format } from 'date-fns';
 
-import { clickPriority } from '../utilities/events';
-
-// TEXT AREA
+// INPUT
 function TaskInput() {
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('taskInputWrapper', 'flex-row');
+  const input = document.createElement('input');
+  input.classList.add('taskForm__input');
+  input.setAttribute('id', 'task-input');
+  input.setAttribute('type', 'text');
+  input.setAttribute('placeholder', 'Enter your task here');
+  input.setAttribute('tabindex', '-1');
+  input.setAttribute('autocomplete', 'off');
 
-  const text = document.createElement('input');
-  text.classList.add('taskForm__input');
-  text.setAttribute('id', 'task-input');
-  text.setAttribute('type', 'text');
-  text.setAttribute('placeholder', 'Enter your task here');
-  text.setAttribute('tabindex', '-1');
-  text.setAttribute('autocomplete', 'off');
-
-  wrapper.appendChild(text);
-
-  return wrapper;
+  return input;
 }
 
 // CONTROLS
@@ -60,6 +53,7 @@ function TaskControls() {
 
   const priorityButtonWrapper = document.createElement('div');
   priorityButtonWrapper.classList.add('taskPriorityButtonWrapper', 'flex-row');
+  priorityButtonWrapper.setAttribute('id', 'priority-wrapper');
 
   const options = [
     { value: 'low', label: 'Low' },
@@ -81,8 +75,6 @@ function TaskControls() {
     button.setAttribute('data-priority', option.value); // data-priority
 
     priorityButtonWrapper.appendChild(button); // add to priority wrapper
-
-    clickPriority(button, priorityButtonWrapper);
   });
 
   priorityWrapper.appendChild(priorityButtonWrapper);
