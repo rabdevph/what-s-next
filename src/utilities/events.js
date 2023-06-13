@@ -193,3 +193,33 @@ export function clickTaskInput() {
     removeErrorBorderClass(input);
   });
 }
+
+// CANCEL TASK BUTTON
+export function clickCancelTask() {
+  const form = document.getElementById('task-form');
+  const input = document.getElementById('task-input');
+  const priorityWrapper = document.getElementById('priority-wrapper');
+  const cancel = document.getElementById('cancel-task');
+  const addTask = document.getElementById('add-task');
+  cancel.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('clicked cancel, hide form');
+    SELECTEDPRIORITY.splice(0);
+    clearInput(input);
+    removeErrorBorderClass(input);
+    removeErrorBorderClass(priorityWrapper);
+    addHiddenClass(form);
+    removeHiddenClass(addTask);
+  });
+}
+
+// ADD TASK BUTTON
+export function clickAddTask() {
+  const form = document.getElementById('task-form');
+  const addTask = document.getElementById('add-task');
+
+  addTask.addEventListener('click', () => {
+    removeHiddenClass(form);
+    addHiddenClass(addTask);
+  });
+}

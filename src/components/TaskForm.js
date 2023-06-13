@@ -110,7 +110,7 @@ function TaskControls() {
 // FORM
 export default function TaskForm() {
   const form = document.createElement('form');
-  form.classList.add('taskForm', 'flex-column');
+  form.classList.add('taskForm', 'flex-column', 'hidden');
   form.setAttribute('id', 'task-form');
 
   form.appendChild(TaskInput()); // add text area to form

@@ -5,6 +5,8 @@ import {
   submitTaskForm,
   clickTaskInput,
   clickPriority,
+  clickCancelTask,
+  clickAddTask,
 } from '../utilities/events';
 
 // HEADER
@@ -62,4 +64,6 @@ export default function Task(taskSection, projectDataId) {
   submitTaskForm();
   clickTaskInput();
   clickPriority();
+  clickCancelTask();
+  clickAddTask();
 }
