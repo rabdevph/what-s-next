@@ -1,6 +1,6 @@
 import TaskForm from './TaskForm';
 
-import { clearContent } from '../utilities/controls';
+import { clearContent, addPriorityColorClass } from '../utilities/controls';
 import {
   submitTaskForm,
   clickTaskInput,
@@ -54,7 +54,7 @@ function AddTask() {
 // TASK LIST
 function TaskList(project) {
   const list = document.createElement('ul');
-  list.classList.add('taskList');
+  list.classList.add('taskList', 'flex-column');
 
   const projectTasks = project.tasks;
 
@@ -81,6 +81,8 @@ function TaskList(project) {
 
       const dueWrapper = document.createElement('div');
       dueWrapper.classList.add('taskDueWrapper', 'flex-row');
+      // add prioriry color here
+      addPriorityColorClass(dueWrapper, projectTask.priority);
 
       const icon = document.createElement('img');
       icon.classList.add('taskDue__icon');

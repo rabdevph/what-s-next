@@ -15,10 +15,10 @@
   --clr-light-zinc: #3f3f46;
   --clr-gray: #6b7280;
 
-  --btn-blue: #2563eb;
-  --btn-green: #22c55e;
-  --btn-yellow: #eab308;
-  --btn-red: #ef4444;
+  --clr-blue: #2563eb;
+  --clr-green: #22c55e;
+  --clr-yellow: #eab308;
+  --clr-red: #ef4444;
 
   --clr-error: #f87171;
 }
@@ -147,7 +147,7 @@ nav {
 }
 
 .newProjectFormButton__button {
-  background-color: var(--btn-blue);
+  background-color: var(--clr-blue);
 }
 
 /* TASK */
@@ -220,18 +220,18 @@ nav {
 }
 
 .taskPriority__button--low {
-  background-color: var(--btn-green);
-  border: 2px solid var(--btn-green);
+  background-color: var(--clr-green);
+  border: 2px solid var(--clr-green);
 }
 
 .taskPriority__button--medium {
-  background-color: var(--btn-yellow);
-  border: 2px solid var(--btn-yellow);
+  background-color: var(--clr-yellow);
+  border: 2px solid var(--clr-yellow);
 }
 
 .taskPriority__button--high {
-  background-color: var(--btn-red);
-  border: 2px solid var(--btn-red);
+  background-color: var(--clr-red);
+  border: 2px solid var(--clr-red);
 }
 
 .taskPriority__button--selected {
@@ -246,7 +246,7 @@ nav {
 }
 
 .taskButton {
-  background-color: var(--btn-blue);
+  background-color: var(--clr-blue);
   outline: 0;
 }
 
@@ -282,11 +282,12 @@ nav {
 .taskList {
   list-style-type: none;
   padding-top: 12px;
+  gap: 12px;
 }
 
 .taskItem {
   background-color: var(--clr-white);
-  border: 0;
+  border: 1px solid var(--clr-dark-zinc);
   border-radius: 6px;
   padding: 12px 16px;
   display: grid;
@@ -314,17 +315,17 @@ nav {
   padding-left: 12px;
 }
 
-/* task due wrapper */
+/* task due */
 .taskDue {
   grid-column: 2 / 3;
-  font-size: 0.675rem;
+  font-size: 0.625rem;
   width: auto;
   padding-left: 12px;
   padding-top: 4px;
 }
 
 .taskDueWrapper {
-  background-color: var(--btn-red); /* temporary */
+  background-color: var(--clr-dark-zinc); /* temporary */
   border-radius: 4px;
   color: var(--fc-white);
   font-weight: bold;
@@ -375,6 +376,19 @@ nav {
 
 .padding-box {
   padding: 12px 24px;
+}
+
+/* PRIORITY  */
+.low-priority {
+  background-color: var(--clr-green);
+}
+
+.medium-priority {
+  background-color: var(--clr-yellow);
+}
+
+.high-priority {
+  background-color: var(--clr-red);
 }
 
 /* ERROR BG COLOR */

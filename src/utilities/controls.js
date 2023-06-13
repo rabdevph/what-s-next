@@ -57,6 +57,20 @@ export function removePrioritySelectedClass(buttons) {
   });
 }
 
+export function addPriorityColorClass(wrapperElement, priority) {
+  if (priority === 'low') {
+    wrapperElement.classList.add('low-priority');
+  }
+
+  if (priority === 'medium') {
+    wrapperElement.classList.add('medium-priority');
+  }
+
+  if (priority === 'high') {
+    wrapperElement.classList.add('high-priority');
+  }
+}
+
 export function clearInput(targetElement) {
   const element = targetElement;
   element.value = '';
