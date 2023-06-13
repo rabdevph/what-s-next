@@ -1,9 +1,9 @@
 // factory function for creating new task
-function createTask(description, priority, dueDate, status) {
+function createTask(description, dueDate, priority, status) {
   return {
     description,
-    priority,
     dueDate,
+    priority,
     status,
   };
 }
@@ -15,8 +15,8 @@ export default function createProject(name) {
     name,
     tasks: [],
 
-    addTask(description, priority, dueDate = 'None', status = 'Pending') {
-      const newTask = createTask(description, priority, dueDate, status);
+    addTask(description, dueDate, priority, status = 'Pending') {
+      const newTask = createTask(description, dueDate, priority, status);
       this.tasks.push(newTask);
     },
 

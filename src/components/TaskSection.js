@@ -58,15 +58,15 @@ export default function Task(taskSection, projectDataId) {
   clearContent(taskSection);
 
   // re-create project object
-  const getProject = deserializedProject(projectDataId);
-  console.log(getProject);
+  const project = deserializedProject(projectDataId);
+  console.log(project);
 
   taskSection.appendChild(TaskHeader(projectDataId));
   taskSection.appendChild(TaskForm());
   taskSection.appendChild(AddTask());
 
   // event handlers
-  submitTaskForm();
+  submitTaskForm(project); // pass re-created project object here
   clickTaskInput();
   clickPriority();
   clickCancelTask();

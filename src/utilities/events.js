@@ -116,7 +116,7 @@ export function sumbitNewProject(component, targetList) {
   });
 }
 
-// NEW PROJECT NAME - INPUT - CLICK
+// NEW PROJECT NAME - INPUT - CLICKname
 export function clickNewProjectName() {
   const newProjectName = document.getElementById('new-project-name');
 
@@ -151,7 +151,7 @@ export function clickPriority() {
 }
 
 // TASK FORM - SUBMIT
-export function submitTaskForm() {
+export function submitTaskForm(project) {
   const form = document.getElementById('task-form');
   const input = document.getElementById('task-input');
   const taskDate = document.getElementById('task-date');
@@ -159,16 +159,17 @@ export function submitTaskForm() {
   const priorityButtons = document.querySelectorAll('.taskPriority__button');
 
   form.addEventListener('submit', (e) => {
-    const inputValue = input.value;
+    const task = input.value;
     const selectedDate = new Date(taskDate.value);
-    const formattedDate = format(selectedDate, 'MMMM d, yyyy');
+    const dueDate = format(selectedDate, 'MMMM d, yyyy');
+    const priority = SELECTEDPRIORITY[0];
 
     e.preventDefault();
 
     console.log('Form submitted..');
-    if (!inputValue || SELECTEDPRIORITY.length < 1) {
+    if (!task || SELECTEDPRIORITY.length < 1) {
       console.log('Form submission failed!');
-      if (!inputValue) {
+      if (!task) {
         console.log('Task empty.');
         addErrorBorderClass(input);
       }
@@ -180,9 +181,13 @@ export function submitTaskForm() {
     } else {
       // save task here
       console.log('Form submission successful!');
-      console.log(`Task: ${inputValue}`);
-      console.log(`Date: ${formattedDate}`);
-      console.log(`Priority: ${SELECTEDPRIORITY[0]}`);
+      console.log(`Task: ${task}`);
+      console.log(`Date: ${dueDate}`);
+      console.log(`Priority: ${priority}`);
+
+      // add task to project then save to localStorage
+      project.addTask(task, dueDate, priority);
+      saveToStorage(project.name, project);
 
       // then clear elements class and value
       SELECTEDPRIORITY.splice(0);
