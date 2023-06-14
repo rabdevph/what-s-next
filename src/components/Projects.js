@@ -31,21 +31,18 @@ export default function ProjectNavItems(targetList) {
       item.setAttribute('data-list-no', index);
 
       const icon = document.createElement('img');
-      icon.classList.add(`item${index}__icon`, 'list-icon');
+      icon.classList.add(`item${index}__icon`, 'list-obj', 'list-icon');
       icon.src = '../src/assets/project.svg';
 
       const text = document.createElement('p');
-      text.classList.add(`item${index}__text`, 'list-text');
+      text.classList.add(`item${index}__text`, 'list-obj', 'list-text');
       text.textContent = project;
-
-      // filler
-      const inset = document.createElement('div');
-      inset.classList.add('inset');
 
       // delete project wrapper
       const delProjectWrapper = document.createElement('div');
       delProjectWrapper.classList.add(
         'projectItemControl',
+        'list-obj',
         'flex-row',
         'hidden'
       );
@@ -85,7 +82,6 @@ export default function ProjectNavItems(targetList) {
 
       item.appendChild(icon);
       item.appendChild(text);
-      item.appendChild(inset);
       item.appendChild(delProjectWrapper);
 
       const projectItem = item;

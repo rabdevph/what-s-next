@@ -101,11 +101,6 @@ nav {
   letter-spacing: 0.1em;
 }
 
-/* filler */
-.inset {
-  flex: 1;
-}
-
 /* project delete wrapper */
 
 .itemControl__delete {
@@ -118,22 +113,6 @@ nav {
 
 .itemControl__cancel {
   background-image: url('../src/assets/cancel.svg');
-}
-
-.project-item-button {
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  display: inline-block;
-  right: 0;
-  height: 16px;
-  width: 16px;
-  opacity: 0.5;
-  outline: 0;
-}
-
-.project-item-button:hover {
-  opacity: 1;
 }
 
 /* ------------------ */
@@ -414,11 +393,32 @@ nav {
 }
 
 .list-text {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   cursor: default;
+  overflow: hidden;
 }
 
 .padding-box {
   padding: 12px 24px;
+}
+
+.project-item-button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  right: 0;
+  height: 16px;
+  width: 16px;
+  opacity: 0.5;
+  outline: 0;
+}
+
+.project-item-button:hover {
+  opacity: 1;
 }
 
 /* TASK STATUS */
