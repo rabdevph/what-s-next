@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 
 import {
   addDeleteIcon,
+  addDeleteWord,
   addErrorBgClass,
   addErrorBorderClass,
   addHiddenClass,
@@ -14,22 +15,28 @@ import {
   clearInput,
   addSelectedProjectClass,
   clearContent,
+  removeDeleteWord,
 } from './controls';
 import { saveToStorage, removeFromStorage } from './data';
 import { isProjectExisting, getSelectedPriority } from './helper';
 import createProject from './todo';
 
+// CONSTANTS
 const SELECTEDPRIORITY = []; // array for priority value
+const newProjectButton = document.getElementById('new-project-button');
+const newProjectForm = document.getElementById('new-project-form');
+const newProjectName = document.getElementById('new-project-name');
+const navListItems = document.querySelectorAll('.navList__item');
+const projectsNavList = document.getElementById('projects-nav-list');
+const cancelNewProject = document.getElementById('cancel-new-project');
+const taskSection = document.getElementById('task-section');
 
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
 export function clickNavListItems() {
-  const newProjectButton = document.getElementById('new-project-button');
-  const newProjectForm = document.getElementById('new-project-form');
-  const newProjectName = document.getElementById('new-project-name');
-  const navListItems = document.querySelectorAll('.navList__item');
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
       console.log(navListItem.id); //
+      clearContent(taskSection);
 
       SELECTEDPRIORITY.splice(0);
       console.log(SELECTEDPRIORITY); //
@@ -49,15 +56,7 @@ export function clickProject(
   index,
   reloadProjectsList
 ) {
-  const projectsNavList = document.getElementById('projects-nav-list');
-
-  const newProjectButton = document.getElementById('new-project-button');
-  const newProjectForm = document.getElementById('new-project-form');
-  const newProjectName = document.getElementById('new-project-name');
-
   projectItem.addEventListener('click', () => {
-    const taskSection = document.getElementById('task-section');
-
     const projectName = projectItem.dataset.id;
     console.log(projectItem.id);
     console.log(projectName);
@@ -90,7 +89,7 @@ export function clickProject(
 }
 
 // DELETE PROJECT BUTTON
-export function clickDeleteProject(element, dataIndex, icon) {
+export function clickDeleteProject(element, dataIndex) {
   element.addEventListener('click', (e) => {
     e.stopPropagation();
 
@@ -100,8 +99,11 @@ export function clickDeleteProject(element, dataIndex, icon) {
     const confirmDelete = document.querySelector(
       `[data-project-confirm-button="${dataIndex}"]`
     );
+    const itemText = document.querySelector(`.item${dataIndex}__text`);
+    const itemIcon = document.querySelector(`.item${dataIndex}__icon`);
 
-    addDeleteIcon(icon);
+    addDeleteWord(itemText);
+    addDeleteIcon(itemIcon);
     addHiddenClass(element);
     removeHiddenClass(cancelDelete);
     removeHiddenClass(confirmDelete);
@@ -109,7 +111,7 @@ export function clickDeleteProject(element, dataIndex, icon) {
 }
 
 // CANCEL DELETE PROJECT
-export function clickCancelDeleteProject(element, dataIndex, icon) {
+export function clickCancelDeleteProject(element, dataIndex) {
   element.addEventListener('click', (e) => {
     e.stopPropagation();
 
@@ -119,8 +121,13 @@ export function clickCancelDeleteProject(element, dataIndex, icon) {
     const confirmDelete = document.querySelector(
       `[data-project-confirm-button="${dataIndex}"]`
     );
+    const itemText = document.querySelector(`.item${dataIndex}__text`);
+    const itemIcon = document.querySelector(`.item${dataIndex}__icon`);
+    const listItem = document.querySelector(`.item${dataIndex}`);
+    const listItemId = listItem.getAttribute('data-id');
 
-    removeDeleteIcon(icon);
+    removeDeleteWord(itemText, listItemId);
+    removeDeleteIcon(itemIcon);
     removeHiddenClass(del);
     addHiddenClass(element);
     addHiddenClass(confirmDelete);
@@ -133,9 +140,6 @@ export function clickConfirmDeleteProject(
   projectName,
   reloadProjectsList
 ) {
-  const projectsNavList = document.getElementById('projects-nav-list');
-  const taskSection = document.getElementById('task-section');
-
   element.addEventListener('click', (e) => {
     e.stopPropagation();
     removeFromStorage(projectName); // delete project
@@ -147,11 +151,6 @@ export function clickConfirmDeleteProject(
 
 // NEW PROJECT BUTTON
 export function clickNewProject(reloadProjects) {
-  const projectsNavList = document.getElementById('projects-nav-list');
-  const taskSection = document.getElementById('task-section');
-  const newProjectButton = document.getElementById('new-project-button');
-  const newProjectForm = document.getElementById('new-project-form');
-
   newProjectButton.addEventListener('click', () => {
     reloadProjects(projectsNavList); // ProjectNavItems(projectsNavList);
     clearContent(taskSection); // clear task section
@@ -162,11 +161,6 @@ export function clickNewProject(reloadProjects) {
 
 // CANCEL PROJECT BUTTON
 export function clickCancelProject() {
-  const cancelNewProject = document.getElementById('cancel-new-project');
-  const newProjectButton = document.getElementById('new-project-button');
-  const newProjectForm = document.getElementById('new-project-form');
-  const newProjectName = document.getElementById('new-project-name');
-
   cancelNewProject.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -179,10 +173,6 @@ export function clickCancelProject() {
 
 // NEW PROJECT FORM - SUBMIT
 export function sumbitNewProject(component, targetList) {
-  const newProjectName = document.getElementById('new-project-name');
-  const newProjectButton = document.getElementById('new-project-button');
-  const newProjectForm = document.getElementById('new-project-form');
-
   newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -204,8 +194,6 @@ export function sumbitNewProject(component, targetList) {
 
 // NEW PROJECT NAME - INPUT - CLICKname
 export function clickNewProjectName() {
-  const newProjectName = document.getElementById('new-project-name');
-
   newProjectName.addEventListener('click', () => {
     removeErrorBgClass(newProjectName);
   });
@@ -213,8 +201,6 @@ export function clickNewProjectName() {
 
 // NEW PROJECT NAME - INPUT - INPUT
 export function inputNewProjectName() {
-  const newProjectName = document.getElementById('new-project-name');
-
   newProjectName.addEventListener('input', () => {
     removeErrorBgClass(newProjectName);
   });
@@ -237,7 +223,7 @@ export function clickPriority() {
 }
 
 // TASK FORM - SUBMIT
-export function submitTaskForm(project, reloadTaskComponent, taskSection) {
+export function submitTaskForm(project, reloadTaskComponent) {
   const form = document.getElementById('task-form');
   const input = document.getElementById('task-input');
   const taskDate = document.getElementById('task-date');
@@ -327,7 +313,7 @@ export function clickAddTask() {
 }
 
 // TASK CHECK BOX
-export function checkTask(project, reloadTaskComponent, taskSection) {
+export function checkTask(project, reloadTaskComponent) {
   const taskCheckBoxes = document.querySelectorAll('.taskItem__checkbox');
 
   taskCheckBoxes.forEach((taskCheckbox, taskIndex) => {

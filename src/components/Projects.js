@@ -20,7 +20,12 @@ export default function ProjectNavItems(targetList) {
       // if projects is not empty and name is not PERSONAL
       // create a list element for each project
       const item = document.createElement('li');
-      item.classList.add('list-item', 'flex-row', 'padding-box');
+      item.classList.add(
+        `item${index}`,
+        'list-item',
+        'flex-row',
+        'padding-box'
+      );
       item.setAttribute('id', `${project.toLowerCase()}-list`);
       item.setAttribute('data-id', project);
       item.setAttribute('data-list-no', index);
@@ -30,7 +35,7 @@ export default function ProjectNavItems(targetList) {
       icon.src = '../src/assets/project.svg';
 
       const text = document.createElement('p');
-      text.classList.add('list-text');
+      text.classList.add(`item${index}__text`, 'list-text');
       text.textContent = project;
 
       // filler
@@ -51,7 +56,7 @@ export default function ProjectNavItems(targetList) {
       del.classList.add('itemControl__delete', 'project-item-button');
       del.setAttribute('data-project-delete-button', index);
 
-      clickDeleteProject(del, index, icon);
+      clickDeleteProject(del, index);
 
       // confirm
       const confirm = document.createElement('button');
@@ -72,7 +77,7 @@ export default function ProjectNavItems(targetList) {
         'hidden'
       );
       cancel.setAttribute('data-project-cancel-button', index);
-      clickCancelDeleteProject(cancel, index, icon);
+      clickCancelDeleteProject(cancel, index);
 
       delProjectWrapper.appendChild(confirm);
       delProjectWrapper.appendChild(cancel);

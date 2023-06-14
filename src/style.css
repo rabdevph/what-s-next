@@ -128,7 +128,12 @@ nav {
   right: 0;
   height: 16px;
   width: 16px;
+  opacity: 0.5;
   outline: 0;
+}
+
+.project-item-button:hover {
+  opacity: 1;
 }
 
 /* ------------------ */

@@ -78,15 +78,30 @@ export function addSelectedProjectClass(element) {
   }
 }
 
-// change icon of selected project to delete
+// add delete icon to selected project
 export function addDeleteIcon(element) {
   const iconElement = element;
   iconElement.src = '../src/assets/delete.svg';
 }
 
+// remove delete icon to selected project
 export function removeDeleteIcon(element) {
   const iconElement = element;
   iconElement.src = '../src/assets/project.svg';
+}
+
+export function addDeleteWord(element) {
+  const textElement = element;
+  const text = textElement.textContent;
+
+  textElement.textContent = `DELETE "${text}"?`;
+}
+
+export function removeDeleteWord(element, dataId) {
+  const textElement = element;
+  const text = dataId;
+
+  textElement.textContent = text;
 }
 
 export function checkTaskStatus(status, checkBox, description) {

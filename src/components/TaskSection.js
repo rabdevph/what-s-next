@@ -133,10 +133,10 @@ export default function Task(taskSection, projectName) {
   taskSection.appendChild(list);
 
   // event handlers
-  submitTaskForm(project, Task, taskSection); //
+  submitTaskForm(project, Task); //
   clickTaskInput();
   clickPriority();
   clickCancelTask();
   clickAddTask();
-  checkTask(project, Task, taskSection);
+  checkTask(project, Task);
 }
