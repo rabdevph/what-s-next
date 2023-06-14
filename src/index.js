@@ -19,7 +19,7 @@ PERSONALPROJECT();
 
 // EVENT HANDLERS
 clickNavListItems();
-clickNewProject();
+clickNewProject(ProjectNavItems);
 clickCancelProject();
 sumbitNewProject(ProjectNavItems, projectsNavList);
 clickNewProjectName();

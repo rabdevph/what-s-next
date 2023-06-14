@@ -13,6 +13,7 @@ import {
   removePrioritySelectedClass,
   clearInput,
   addSelectedProjectClass,
+  clearContent,
 } from './controls';
 import { saveToStorage, removeFromStorage } from './data';
 import { isProjectExisting, getSelectedPriority } from './helper';
@@ -133,21 +134,27 @@ export function clickConfirmDeleteProject(
   reloadProjectsList
 ) {
   const projectsNavList = document.getElementById('projects-nav-list');
+  const taskSection = document.getElementById('task-section');
 
   element.addEventListener('click', (e) => {
     e.stopPropagation();
     removeFromStorage(projectName); // delete project
     console.log(`Project [${projectName}] deleted.`);
     reloadProjectsList(projectsNavList); // reload projects nav list
+    clearContent(taskSection);
   });
 }
 
 // NEW PROJECT BUTTON
-export function clickNewProject() {
+export function clickNewProject(reloadProjects) {
+  const projectsNavList = document.getElementById('projects-nav-list');
+  const taskSection = document.getElementById('task-section');
   const newProjectButton = document.getElementById('new-project-button');
   const newProjectForm = document.getElementById('new-project-form');
 
   newProjectButton.addEventListener('click', () => {
+    reloadProjects(projectsNavList); // ProjectNavItems(projectsNavList);
+    clearContent(taskSection); // clear task section
     addHiddenClass(newProjectButton); // hide new project form
     removeHiddenClass(newProjectForm); // show new project button
   });
