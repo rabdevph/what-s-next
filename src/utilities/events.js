@@ -1,17 +1,20 @@
 import { format } from 'date-fns';
 
 import {
+  addDeleteIcon,
   addErrorBgClass,
   addErrorBorderClass,
   addHiddenClass,
   addPrioritySelectedClass,
+  removeDeleteIcon,
   removeErrorBgClass,
   removeErrorBorderClass,
   removeHiddenClass,
   removePrioritySelectedClass,
   clearInput,
+  addSelectedProjectClass,
 } from './controls';
-import { saveToStorage } from './data';
+import { saveToStorage, removeFromStorage } from './data';
 import { isProjectExisting, getSelectedPriority } from './helper';
 import createProject from './todo';
 
@@ -39,7 +42,14 @@ export function clickNavListItems() {
 }
 
 // PROJECTS NAVIGATION LIST
-export function clickProjectItems(projectItem, componentFunc) {
+export function clickProject(
+  projectItem,
+  componentFunc,
+  index,
+  reloadProjectsList
+) {
+  const projectsNavList = document.getElementById('projects-nav-list');
+
   const newProjectButton = document.getElementById('new-project-button');
   const newProjectForm = document.getElementById('new-project-form');
   const newProjectName = document.getElementById('new-project-name');
@@ -52,14 +62,83 @@ export function clickProjectItems(projectItem, componentFunc) {
     console.log(projectName);
 
     SELECTEDPRIORITY.splice(0);
-    console.log(SELECTEDPRIORITY); //
+    console.log(SELECTEDPRIORITY);
 
+    // reload projectsNavList
+    reloadProjectsList(projectsNavList); // ProjectNavItems(projectsNavList)
+
+    // get elements here after reloading the list
+    const projectsNavListItem = document.querySelector(
+      `[data-list-no="${index}"]`
+    );
+    const itemControlWrapper = document.getElementById(
+      `project-${index}-control-wrapper`
+    );
+
+    addSelectedProjectClass(projectsNavListItem); // change background of selected project
+    // change icon of project item
+
+    removeHiddenClass(itemControlWrapper); // show delete project wrapper - controls
     componentFunc(taskSection, projectName); // Task(taskSection, projectName)
 
     removeHiddenClass(newProjectButton); // if hidden, show new project button
     addHiddenClass(newProjectForm); // if not hidden, hide new project form
     removeErrorBgClass(newProjectName); // if there's error, remove error class
     clearInput(newProjectName); // clear input
+  });
+}
+
+// DELETE PROJECT BUTTON
+export function clickDeleteProject(element, dataIndex, icon) {
+  element.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    const cancelDelete = document.querySelector(
+      `[data-project-cancel-button="${dataIndex}"]`
+    );
+    const confirmDelete = document.querySelector(
+      `[data-project-confirm-button="${dataIndex}"]`
+    );
+
+    addDeleteIcon(icon);
+    addHiddenClass(element);
+    removeHiddenClass(cancelDelete);
+    removeHiddenClass(confirmDelete);
+  });
+}
+
+// CANCEL DELETE PROJECT
+export function clickCancelDeleteProject(element, dataIndex, icon) {
+  element.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    const del = document.querySelector(
+      `[data-project-delete-button="${dataIndex}"]`
+    );
+    const confirmDelete = document.querySelector(
+      `[data-project-confirm-button="${dataIndex}"]`
+    );
+
+    removeDeleteIcon(icon);
+    removeHiddenClass(del);
+    addHiddenClass(element);
+    addHiddenClass(confirmDelete);
+  });
+}
+
+// CONFIRM DELETE PROJECT
+export function clickConfirmDeleteProject(
+  element,
+  projectName,
+  reloadProjectsList
+) {
+  const projectsNavList = document.getElementById('projects-nav-list');
+
+  element.addEventListener('click', (e) => {
+    e.stopPropagation();
+    removeFromStorage(projectName); // delete project
+    console.log(`Project [${projectName}] deleted.`);
+    reloadProjectsList(projectsNavList); // reload projects nav list
   });
 }
 

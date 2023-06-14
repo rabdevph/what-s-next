@@ -71,6 +71,24 @@ export function addPriorityColorClass(wrapperElement, priority) {
   }
 }
 
+// add selected-project class to selected project
+export function addSelectedProjectClass(element) {
+  if (!element.classList.contains('selected-project')) {
+    element.classList.add('selected-project');
+  }
+}
+
+// change icon of selected project to delete
+export function addDeleteIcon(element) {
+  const iconElement = element;
+  iconElement.src = '../src/assets/delete.svg';
+}
+
+export function removeDeleteIcon(element) {
+  const iconElement = element;
+  iconElement.src = '../src/assets/project.svg';
+}
+
 export function checkTaskStatus(status, checkBox, description) {
   if (status === 'completed') {
     // checkbox = checked
