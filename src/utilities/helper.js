@@ -83,6 +83,12 @@ export function getUpcomingTasks() {
     return isWithinInterval(dueDate, { start: startDate, end: endDate });
   });
 
+  upComingTasks.sort((a, b) => {
+    const dateA = parse(a.dueDate, 'MMMM d, yyyy', new Date());
+    const dateB = parse(b.dueDate, 'MMMM d, yyyy', new Date());
+    return dateA - dateB;
+  });
+
   return upComingTasks;
 }
 
