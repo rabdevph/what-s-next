@@ -104,11 +104,16 @@ export function removeDeleteWord(element, dataId) {
   textElement.textContent = text;
 }
 
-export function checkTaskStatus(status, checkBox, description) {
+export function checkTaskStatus(status, checkBox, checBoxIcon, description) {
   if (status === 'completed') {
-    // checkbox = checked
-    const taskCheckbox = checkBox;
-    taskCheckbox.checked = true;
+    const icon = checBoxIcon;
+
+    // checkbox(button) = checked
+    if (!checkBox.classList.contains('checked')) {
+      checkBox.classList.add('checked');
+    }
+
+    icon.src = '../src/assets/check.svg';
 
     // task = line through
     const taskDescription = description;

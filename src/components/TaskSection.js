@@ -82,10 +82,14 @@ export default function Task(taskSection, projectName) {
       item.setAttribute('data-task-no', projectTaskIndex);
 
       // task checkbox
-      const checkBox = document.createElement('input');
+      const checkBox = document.createElement('button');
       checkBox.classList.add('taskItem__checkbox');
-      checkBox.setAttribute('type', 'checkbox');
       checkBox.setAttribute('id', `taskCheckBox${projectTaskIndex}`);
+
+      const checkBoxIcon = document.createElement('img');
+      checkBoxIcon.src = '../src/assets/check-dark.svg';
+
+      checkBox.appendChild(checkBoxIcon);
 
       // task description
       const description = document.createElement('p');
@@ -98,7 +102,7 @@ export default function Task(taskSection, projectName) {
       const taskStatus = project.getTaskStatus(projectTaskIndex);
       console.log(taskStatus);
 
-      checkTaskStatus(taskStatus, checkBox, description);
+      checkTaskStatus(taskStatus, checkBox, checkBoxIcon, description);
 
       // task due icon and date
       const due = document.createElement('div');

@@ -7,13 +7,13 @@ import {
   addErrorBorderClass,
   addHiddenClass,
   addPrioritySelectedClass,
+  addSelectedProjectClass,
   removeDeleteIcon,
   removeErrorBgClass,
   removeErrorBorderClass,
   removeHiddenClass,
   removePrioritySelectedClass,
   clearInput,
-  addSelectedProjectClass,
   clearContent,
   removeDeleteWord,
 } from './controls';
@@ -317,11 +317,7 @@ export function checkTask(project, reloadTaskComponent) {
   const taskCheckBoxes = document.querySelectorAll('.taskItem__checkbox');
 
   taskCheckBoxes.forEach((taskCheckbox, taskIndex) => {
-    // const taskItemDescription = document.querySelector(
-    //   `.taskItem${taskIndex}__description`
-    // );
-
-    taskCheckbox.addEventListener('change', (e) => {
+    taskCheckbox.addEventListener('click', (e) => {
       if (e.target.checked) {
         // change status to completed
         project.changeTaskStatus(taskIndex); // change status

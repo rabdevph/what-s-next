@@ -108,11 +108,11 @@ nav {
 }
 
 .itemControl__confirm {
-  background-image: url('../src/assets/confirm.svg');
+  background-image: url('../src/assets/check.svg');
 }
 
 .itemControl__cancel {
-  background-image: url('../src/assets/cancel.svg');
+  background-image: url('../src/assets/cross.svg');
 }
 
 /* ------------------ */
@@ -296,17 +296,14 @@ nav {
 /* --------- */
 
 .taskList {
-  background-color: var(--clr-white);
   list-style-type: none;
   margin-top: 12px;
   padding: 2px 0;
-  gap: 2px;
+  gap: 4px;
 }
 
 .taskItem {
-  background-color: var(--clr-light-gray);
-  /* border: 1px solid var(--clr-dark-zinc);
-  border-radius: 6px; */
+  background-color: var(--clr-white);
   padding: 12px 16px;
   display: grid;
   align-items: center;
@@ -314,19 +311,12 @@ nav {
 }
 
 .taskItem__checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--clr-dark-zinc);
-  border-radius: 8px;
-  cursor: pointer;
-  outline: none;
-}
-
-.taskItem__checkbox:checked {
-  background-color: var(--clr-gray);
+  background-color: transparent;
+  border: 1px solid var(--clr-light-zinc);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  padding: 2px;
 }
 
 .taskItem__description {
@@ -344,8 +334,6 @@ nav {
 }
 
 .taskDueWrapper {
-  background-color: var(--clr-dark-zinc); /* temporary */
-  border-radius: 4px;
   color: var(--fc-white);
   font-weight: bold;
   gap: 6px;
@@ -451,6 +439,11 @@ nav {
 
 .error-border {
   border: 2px solid var(--clr-error);
+}
+
+/* CHECKED */
+.checked {
+  background-color: var(--clr-light-zinc);
 }
 
 /* HIDDEN */
