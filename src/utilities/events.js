@@ -19,7 +19,11 @@ import {
   removeSelectedNavClass,
 } from './controls';
 import { saveToStorage, removeFromStorage } from './data';
-import { isProjectExisting, getSelectedPriority } from './helper';
+import {
+  isProjectExisting,
+  getSelectedPriority,
+  getUpcomingTasks,
+} from './helper';
 import createProject from './todo';
 
 // CONSTANTS
@@ -48,6 +52,8 @@ export function clickNavListItems(projectComponent, taskComponent) {
       }
 
       if (navListItem.id === 'upcoming-list') {
+        console.log(navListItem.id);
+        console.log(getUpcomingTasks());
         addSelectedNavClass(upcomingList);
         removeSelectedNavClass([todayList, personalList]);
       }
