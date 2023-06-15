@@ -1,5 +1,6 @@
 import ProjectNavItems from './components/Projects';
 import Task from './components/TaskSection';
+import UpcomingTasks from './components/UpcomingTasks';
 
 import {
   clickCancelProject,
@@ -19,7 +20,7 @@ const projectsNavList = document.getElementById('projects-nav-list');
 ProjectNavItems(projectsNavList); // load projects list
 
 // EVENT HANDLERS
-clickNavListItems(ProjectNavItems, Task);
+clickNavListItems(ProjectNavItems, Task, UpcomingTasks);
 clickNewProject(ProjectNavItems);
 clickCancelProject();
 sumbitNewProject(ProjectNavItems, projectsNavList);

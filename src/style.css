@@ -292,11 +292,27 @@ nav {
 /* TASK LIST */
 /* --------- */
 
+.upcomingList,
 .taskList {
   list-style-type: none;
   margin-top: 12px;
   padding: 2px 0;
   gap: 4px;
+}
+
+.upcomingItem {
+  background-color: var(--clr-white);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px;
+  padding: 12px 16px;
+}
+
+.upcoming-bullet {
+  background-color: var(--clr-light-zinc);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
 }
 
 .taskItem {
@@ -316,29 +332,40 @@ nav {
   padding: 2px;
 }
 
+.upcomingItem__description,
 .taskItem__description {
   font-size: 0.875rem;
   padding-left: 12px;
 }
 
-/* task due */
+.taskInfo,
 .taskDue {
   grid-column: 2 / 3;
   font-size: 0.625rem;
+  gap: 6px;
   width: auto;
   padding-left: 12px;
   padding-top: 4px;
 }
 
-.taskDueWrapper {
+.taskProjectWrapper,
+.taskStatusWrapper {
+  background-color: var(--clr-light-zinc);
+}
+
+.taskDueWrapper,
+.taskProjectWrapper,
+.taskStatusWrapper {
   color: var(--fc-white);
   font-weight: bold;
-  gap: 6px;
+  gap: 4px;
   padding: 4px 8px;
   width: max-content;
 }
 
-.taskDue__icon {
+.taskDue__icon,
+.taskProject__icon,
+.taskStatus__icon {
   height: 14px;
 }
 

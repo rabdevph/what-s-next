@@ -19,7 +19,7 @@ import {
 import { deserializedProject } from '../utilities/helper';
 
 // HEADER
-function TaskHeader(projectName) {
+export function TaskHeader(projectName) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('taskHeaderWrapper');
   wrapper.setAttribute('id', 'taskHeaderWrapper');

@@ -19,11 +19,7 @@ import {
   removeSelectedNavClass,
 } from './controls';
 import { saveToStorage, removeFromStorage } from './data';
-import {
-  isProjectExisting,
-  getSelectedPriority,
-  getUpcomingTasks,
-} from './helper';
+import { isProjectExisting, getSelectedPriority } from './helper';
 import createProject from './todo';
 
 // CONSTANTS
@@ -41,7 +37,11 @@ const cancelNewProject = document.getElementById('cancel-new-project');
 const taskSection = document.getElementById('task-section');
 
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
-export function clickNavListItems(projectComponent, taskComponent) {
+export function clickNavListItems(
+  projectComponent,
+  taskComponent,
+  upComingTasksComponent
+) {
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
       clearContent(taskSection);
@@ -53,9 +53,10 @@ export function clickNavListItems(projectComponent, taskComponent) {
 
       if (navListItem.id === 'upcoming-list') {
         console.log(navListItem.id);
-        console.log(getUpcomingTasks());
+
         addSelectedNavClass(upcomingList);
         removeSelectedNavClass([todayList, personalList]);
+        upComingTasksComponent(taskSection);
       }
 
       if (navListItem.id === 'personal-list') {
