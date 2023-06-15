@@ -307,7 +307,7 @@ nav {
   padding: 12px 16px;
   display: grid;
   align-items: center;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
 }
 
 .taskItem__checkbox {
@@ -343,6 +343,34 @@ nav {
 
 .taskDue__icon {
   height: 14px;
+}
+
+.task-item-button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  right: 0;
+  height: 16px;
+  width: 16px;
+  opacity: 0.5;
+  outline: 0;
+}
+
+.task-item-button:hover {
+  opacity: 1;
+}
+
+.taskControl__delete {
+  background-image: url('../src/assets/delete-dark.svg');
+}
+
+.taskControl__confirm {
+  background-image: url('../src/assets/check-dark.svg');
+}
+
+.taskControl__cancel {
+  background-image: url('../src/assets/cross-dark.svg');
 }
 
 /* ==================== */

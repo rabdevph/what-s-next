@@ -334,3 +334,54 @@ export function checkTask(project, reloadTaskComponent) {
     });
   });
 }
+
+// DELETE TASK
+export function clickDeleteTask(element, dataIndex) {
+  element.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    const cancelDelete = document.querySelector(
+      `[data-task-cancel-button="${dataIndex}"]`
+    );
+    const confirmDelete = document.querySelector(
+      `[data-task-confirm-button="${dataIndex}"]`
+    );
+
+    addHiddenClass(element);
+    removeHiddenClass(cancelDelete);
+    removeHiddenClass(confirmDelete);
+  });
+}
+
+// CANCEL DELETE TASK
+export function clickCancelDeleteTask(element, dataIndex) {
+  element.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    const del = document.querySelector(
+      `[data-task-delete-button="${dataIndex}"]`
+    );
+    const confirmDelete = document.querySelector(
+      `[data-task-confirm-button="${dataIndex}"]`
+    );
+
+    removeHiddenClass(del);
+    addHiddenClass(element);
+    addHiddenClass(confirmDelete);
+  });
+}
+
+// CONFIRM DELETE TASK
+export function clickConfirmDeleteTask(
+  element,
+  project,
+  taskIndex,
+  reloadTaskSection
+) {
+  element.addEventListener('click', (e) => {
+    e.stopPropagation();
+    project.removeTask(taskIndex); // delete task
+    saveToStorage(project.name, project); // update localStorage
+    reloadTaskSection(taskSection, project.name); // reload task section
+  });
+}

@@ -20,6 +20,10 @@ export default function createProject(name) {
       this.tasks.push(newTask);
     },
 
+    removeTask(index) {
+      this.tasks.splice(index, 1);
+    },
+
     changeTaskStatus(index) {
       this.tasks[index].status =
         this.tasks[index].status === 'pending' ? 'completed' : 'pending';

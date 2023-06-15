@@ -12,6 +12,9 @@ import {
   clickCancelTask,
   clickAddTask,
   checkTask,
+  clickDeleteTask,
+  clickCancelDeleteTask,
+  clickConfirmDeleteTask,
 } from '../utilities/events';
 import { deserializedProject } from '../utilities/helper';
 
@@ -76,18 +79,18 @@ export default function Task(taskSection, projectName) {
 
   if (projectTasks.length !== 0) {
     // if task is not empty, display the tasks.
-    projectTasks.forEach((projectTask, projectTaskIndex) => {
+    projectTasks.forEach((projectTask, taskIndex) => {
       const item = document.createElement('li');
-      item.classList.add('taskItem', `taskItem${projectTaskIndex}`);
-      item.setAttribute('data-task-no', projectTaskIndex);
+      item.classList.add('taskItem', `taskItem${taskIndex}`);
+      item.setAttribute('data-task-no', taskIndex);
 
       // task checkbox
       const checkBox = document.createElement('button');
       checkBox.classList.add('taskItem__checkbox');
-      checkBox.setAttribute('id', `taskCheckBox${projectTaskIndex}`);
+      checkBox.setAttribute('id', `taskCheckBox${taskIndex}`);
 
       const checkBoxIcon = document.createElement('img');
-      checkBoxIcon.src = '../src/assets/check-dark.svg';
+      checkBoxIcon.src = '../src/assets/check-zinc.svg';
 
       checkBox.appendChild(checkBoxIcon);
 
@@ -95,11 +98,48 @@ export default function Task(taskSection, projectName) {
       const description = document.createElement('p');
       description.classList.add(
         'taskItem__description',
-        `taskItem${projectTaskIndex}__description`
+        `taskItem${taskIndex}__description`
       );
       description.textContent = projectTask.description;
 
-      const taskStatus = project.getTaskStatus(projectTaskIndex);
+      // delete task wrapper
+      const deltaskWrapper = document.createElement('div');
+      deltaskWrapper.classList.add('taskItemControl', 'flex-row');
+      deltaskWrapper.setAttribute('id', `task-${taskIndex}-control-wrapper`);
+
+      // delete
+      const del = document.createElement('button');
+      del.classList.add('taskControl__delete', 'task-item-button');
+      del.setAttribute('data-task-delete-button', taskIndex);
+
+      // click event
+      clickDeleteTask(del, taskIndex);
+
+      // confirm
+      const confirm = document.createElement('button');
+      confirm.classList.add(
+        'taskControl__confirm',
+        'task-item-button',
+        'hidden'
+      );
+      confirm.setAttribute('data-task-confirm-button', taskIndex);
+
+      // click event handler
+      clickConfirmDeleteTask(confirm, project, taskIndex, Task);
+
+      // cancel
+      const cancel = document.createElement('button');
+      cancel.classList.add('taskControl__cancel', 'task-item-button', 'hidden');
+      cancel.setAttribute('data-task-cancel-button', taskIndex);
+
+      // click event handler
+      clickCancelDeleteTask(cancel, taskIndex);
+
+      deltaskWrapper.appendChild(confirm);
+      deltaskWrapper.appendChild(cancel);
+      deltaskWrapper.appendChild(del);
+
+      const taskStatus = project.getTaskStatus(taskIndex);
       console.log(taskStatus);
 
       checkTaskStatus(taskStatus, checkBox, checkBoxIcon, description);
@@ -128,6 +168,7 @@ export default function Task(taskSection, projectName) {
 
       item.appendChild(checkBox);
       item.appendChild(description);
+      item.appendChild(deltaskWrapper);
       item.appendChild(due);
 
       list.appendChild(item);
