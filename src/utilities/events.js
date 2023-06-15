@@ -7,7 +7,7 @@ import {
   addErrorBorderClass,
   addHiddenClass,
   addPrioritySelectedClass,
-  addSelectedProjectClass,
+  addSelectedNavClass,
   removeDeleteIcon,
   removeErrorBgClass,
   removeErrorBorderClass,
@@ -16,6 +16,7 @@ import {
   clearInput,
   clearContent,
   removeDeleteWord,
+  removeSelectedNavClass,
 } from './controls';
 import { saveToStorage, removeFromStorage } from './data';
 import { isProjectExisting, getSelectedPriority } from './helper';
@@ -23,6 +24,10 @@ import createProject from './todo';
 
 // CONSTANTS
 const SELECTEDPRIORITY = []; // array for priority value
+
+const todayList = document.getElementById('today-list');
+const upcomingList = document.getElementById('upcoming-list');
+const personalList = document.getElementById('personal-list');
 const newProjectButton = document.getElementById('new-project-button');
 const newProjectForm = document.getElementById('new-project-form');
 const newProjectName = document.getElementById('new-project-name');
@@ -32,17 +37,35 @@ const cancelNewProject = document.getElementById('cancel-new-project');
 const taskSection = document.getElementById('task-section');
 
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
-export function clickNavListItems() {
+export function clickNavListItems(projectComponent, taskComponent) {
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
-      console.log(navListItem.id); //
       clearContent(taskSection);
 
-      SELECTEDPRIORITY.splice(0);
-      console.log(SELECTEDPRIORITY); //
+      if (navListItem.id === 'today-list') {
+        addSelectedNavClass(todayList);
+        removeSelectedNavClass([upcomingList, personalList]);
+      }
 
-      removeHiddenClass(newProjectButton);
-      addHiddenClass(newProjectForm);
+      if (navListItem.id === 'upcoming-list') {
+        addSelectedNavClass(upcomingList);
+        removeSelectedNavClass([todayList, personalList]);
+      }
+
+      if (navListItem.id === 'personal-list') {
+        // PERSONAL NAV
+        const PERSONAL = personalList.getAttribute('data-id');
+        addSelectedNavClass(personalList);
+        removeSelectedNavClass([todayList, upcomingList]);
+        taskComponent(taskSection, PERSONAL); // populate task section: Task(taskSection)
+      }
+
+      projectComponent(projectsNavList); // reload projects list: ProjectNavItems(projectsNavList)
+
+      SELECTEDPRIORITY.splice(0);
+
+      removeHiddenClass([newProjectButton]);
+      addHiddenClass([newProjectForm]);
       removeErrorBgClass(newProjectName);
       clearInput(newProjectName);
     });
@@ -51,38 +74,31 @@ export function clickNavListItems() {
 
 // PROJECTS NAVIGATION LIST
 export function clickProject(
-  projectItem,
+  listItem,
+  projectIndex,
   componentFunc,
-  index,
   reloadProjectsList
 ) {
-  projectItem.addEventListener('click', () => {
-    const projectName = projectItem.dataset.id;
-    console.log(projectItem.id);
-    console.log(projectName);
+  listItem.addEventListener('click', () => {
+    const projectName = listItem.dataset.id;
 
-    SELECTEDPRIORITY.splice(0);
-    console.log(SELECTEDPRIORITY);
+    SELECTEDPRIORITY.splice(0); // clear priority array
 
-    // reload projectsNavList
-    reloadProjectsList(projectsNavList); // ProjectNavItems(projectsNavList)
+    reloadProjectsList(projectsNavList); // reload Projects: ProjectNavItems(projectsNavList)
 
     // get elements here after reloading the list
     const projectsNavListItem = document.querySelector(
-      `[data-list-no="${index}"]`
+      `[data-list-no="${projectIndex}"]`
     );
     const itemControlWrapper = document.getElementById(
-      `project-${index}-control-wrapper`
+      `project-${projectIndex}-control-wrapper`
     );
 
-    addSelectedProjectClass(projectsNavListItem); // change background of selected project
-    // change icon of project item
-
-    removeHiddenClass(itemControlWrapper); // show delete project wrapper - controls
-    componentFunc(taskSection, projectName); // Task(taskSection, projectName)
-
-    removeHiddenClass(newProjectButton); // if hidden, show new project button
-    addHiddenClass(newProjectForm); // if not hidden, hide new project form
+    removeSelectedNavClass([todayList, upcomingList, personalList]); // remove selected
+    addSelectedNavClass(projectsNavListItem); // change background of selected project
+    removeHiddenClass([itemControlWrapper, newProjectButton]); // show delete and new project
+    componentFunc(taskSection, projectName); // populate task section: Task(taskSection, projectName)
+    addHiddenClass([newProjectForm]); // if not hidden, hide new project form
     removeErrorBgClass(newProjectName); // if there's error, remove error class
     clearInput(newProjectName); // clear input
   });
@@ -104,9 +120,8 @@ export function clickDeleteProject(element, dataIndex) {
 
     addDeleteWord(itemText);
     addDeleteIcon(itemIcon);
-    addHiddenClass(element);
-    removeHiddenClass(cancelDelete);
-    removeHiddenClass(confirmDelete);
+    addHiddenClass([element]);
+    removeHiddenClass([cancelDelete, confirmDelete]);
   });
 }
 
@@ -128,9 +143,8 @@ export function clickCancelDeleteProject(element, dataIndex) {
 
     removeDeleteWord(itemText, listItemId);
     removeDeleteIcon(itemIcon);
-    removeHiddenClass(del);
-    addHiddenClass(element);
-    addHiddenClass(confirmDelete);
+    removeHiddenClass([del]);
+    addHiddenClass([element, confirmDelete]);
   });
 }
 
@@ -143,7 +157,6 @@ export function clickConfirmDeleteProject(
   element.addEventListener('click', (e) => {
     e.stopPropagation();
     removeFromStorage(projectName); // delete project
-    console.log(`Project [${projectName}] deleted.`);
     reloadProjectsList(projectsNavList); // reload projects nav list
     clearContent(taskSection);
   });
@@ -152,10 +165,11 @@ export function clickConfirmDeleteProject(
 // NEW PROJECT BUTTON
 export function clickNewProject(reloadProjects) {
   newProjectButton.addEventListener('click', () => {
+    removeSelectedNavClass([todayList, upcomingList, personalList]); // remove selected
     reloadProjects(projectsNavList); // ProjectNavItems(projectsNavList);
     clearContent(taskSection); // clear task section
-    addHiddenClass(newProjectButton); // hide new project form
-    removeHiddenClass(newProjectForm); // show new project button
+    addHiddenClass([newProjectButton]); // hide new project form
+    removeHiddenClass([newProjectForm]); // show new project button
   });
 }
 
@@ -164,8 +178,8 @@ export function clickCancelProject() {
   cancelNewProject.addEventListener('click', (e) => {
     e.preventDefault();
 
-    addHiddenClass(newProjectForm); // hide new project form
-    removeHiddenClass(newProjectButton); // show new project button
+    addHiddenClass([newProjectForm]); // hide new project form
+    removeHiddenClass([newProjectButton]); // show new project button
     removeErrorBgClass(newProjectName); // remove bg error when closed
     clearInput(newProjectName); // clear text
   });
@@ -184,8 +198,8 @@ export function sumbitNewProject(component, targetList) {
     } else {
       const project = createProject(projectName.toUpperCase()); // create project
       saveToStorage(project.name, project); // save to localStorage
-      addHiddenClass(newProjectForm); // hide new project form
-      removeHiddenClass(newProjectButton); // show new project button
+      addHiddenClass([newProjectForm]); // hide new project form
+      removeHiddenClass([newProjectButton]); // show new project button
       clearInput(newProjectName); // clear text
       component(targetList); // ProjectNavItems(projectsNavList) - load newly added project
     }
@@ -215,7 +229,6 @@ export function clickPriority() {
     priorityButton.addEventListener('click', () => {
       SELECTEDPRIORITY.splice(0); // clear array every click to store only one value
       SELECTEDPRIORITY.push(getSelectedPriority(priorityButton)); // get priority value then save to array
-      console.log(`Priority: ${SELECTEDPRIORITY[0]}`);
       addPrioritySelectedClass(priorityButton, priorityButtonWrapper);
       removeErrorBorderClass(priorityButtonWrapper);
     });
@@ -238,25 +251,15 @@ export function submitTaskForm(project, reloadTaskComponent) {
 
     e.preventDefault();
 
-    console.log('Form submitted..');
     if (!task || SELECTEDPRIORITY.length === 0) {
-      console.log('Form submission failed!');
       if (!task) {
-        console.log('Task empty.');
         addErrorBorderClass(input);
       }
 
       if (SELECTEDPRIORITY.length === 0) {
-        console.log('No selected priority.');
         addErrorBorderClass(priorityWrapper);
       }
     } else {
-      // save task here
-      console.log('Form submission successful!');
-      console.log(`Task: ${task}`);
-      console.log(`Date: ${dueDate}`);
-      console.log(`Priority: ${priority}`);
-
       // add task to project then save to localStorage
       project.addTask(task, dueDate, priority);
       saveToStorage(project.name, project);
@@ -289,14 +292,13 @@ export function clickCancelTask() {
 
   cancel.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log('clicked cancel, hide form');
     SELECTEDPRIORITY.splice(0);
     removePrioritySelectedClass(priorityButtons);
     clearInput(input);
     removeErrorBorderClass(input);
     removeErrorBorderClass(priorityWrapper);
-    addHiddenClass(form);
-    removeHiddenClass(addTaskWrapper);
+    addHiddenClass([form]);
+    removeHiddenClass([addTaskWrapper]);
   });
 }
 
@@ -307,8 +309,8 @@ export function clickAddTask() {
   const addTask = document.getElementById('add-task');
 
   addTask.addEventListener('click', () => {
-    removeHiddenClass(form);
-    addHiddenClass(addTaskWrapper);
+    removeHiddenClass([form]);
+    addHiddenClass([addTaskWrapper]);
   });
 }
 
@@ -347,9 +349,8 @@ export function clickDeleteTask(element, dataIndex) {
       `[data-task-confirm-button="${dataIndex}"]`
     );
 
-    addHiddenClass(element);
-    removeHiddenClass(cancelDelete);
-    removeHiddenClass(confirmDelete);
+    addHiddenClass([element]);
+    removeHiddenClass([cancelDelete, confirmDelete]);
   });
 }
 
@@ -365,9 +366,8 @@ export function clickCancelDeleteTask(element, dataIndex) {
       `[data-task-confirm-button="${dataIndex}"]`
     );
 
-    removeHiddenClass(del);
-    addHiddenClass(element);
-    addHiddenClass(confirmDelete);
+    removeHiddenClass([del]);
+    addHiddenClass([element, confirmDelete]);
   });
 }
 

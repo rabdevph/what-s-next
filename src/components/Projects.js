@@ -15,27 +15,27 @@ export default function ProjectNavItems(targetList) {
   const projects = getProjectNames();
 
   // loop through each project name
-  projects.forEach((project, index) => {
+  projects.forEach((project, projectIndex) => {
     if (projects && project !== 'PERSONAL') {
       // if projects is not empty and name is not PERSONAL
       // create a list element for each project
       const item = document.createElement('li');
       item.classList.add(
-        `item${index}`,
+        `item${projectIndex}`,
         'list-item',
         'flex-row',
         'padding-box'
       );
       item.setAttribute('id', `${project.toLowerCase()}-list`);
       item.setAttribute('data-id', project);
-      item.setAttribute('data-list-no', index);
+      item.setAttribute('data-list-no', projectIndex);
 
       const icon = document.createElement('img');
-      icon.classList.add(`item${index}__icon`, 'list-obj', 'list-icon');
+      icon.classList.add(`item${projectIndex}__icon`, 'list-obj', 'list-icon');
       icon.src = '../src/assets/project.svg';
 
       const text = document.createElement('p');
-      text.classList.add(`item${index}__text`, 'list-obj', 'list-text');
+      text.classList.add(`item${projectIndex}__text`, 'list-obj', 'list-text');
       text.textContent = project;
 
       // delete project wrapper
@@ -46,14 +46,17 @@ export default function ProjectNavItems(targetList) {
         'flex-row',
         'hidden'
       );
-      delProjectWrapper.setAttribute('id', `project-${index}-control-wrapper`);
+      delProjectWrapper.setAttribute(
+        'id',
+        `project-${projectIndex}-control-wrapper`
+      );
 
       // delete
       const del = document.createElement('button');
       del.classList.add('itemControl__delete', 'project-item-button');
-      del.setAttribute('data-project-delete-button', index);
+      del.setAttribute('data-project-delete-button', projectIndex);
 
-      clickDeleteProject(del, index);
+      clickDeleteProject(del, projectIndex);
 
       // confirm
       const confirm = document.createElement('button');
@@ -62,7 +65,7 @@ export default function ProjectNavItems(targetList) {
         'project-item-button',
         'hidden'
       );
-      confirm.setAttribute('data-project-confirm-button', index);
+      confirm.setAttribute('data-project-confirm-button', projectIndex);
 
       clickConfirmDeleteProject(confirm, project, ProjectNavItems);
 
@@ -73,8 +76,8 @@ export default function ProjectNavItems(targetList) {
         'project-item-button',
         'hidden'
       );
-      cancel.setAttribute('data-project-cancel-button', index);
-      clickCancelDeleteProject(cancel, index);
+      cancel.setAttribute('data-project-cancel-button', projectIndex);
+      clickCancelDeleteProject(cancel, projectIndex);
 
       delProjectWrapper.appendChild(confirm);
       delProjectWrapper.appendChild(cancel);
@@ -84,9 +87,10 @@ export default function ProjectNavItems(targetList) {
       item.appendChild(text);
       item.appendChild(delProjectWrapper);
 
-      const projectItem = item;
+      const listItem = item;
 
-      clickProject(projectItem, Task, index, ProjectNavItems); // click event handler
+      // Projects click event handler
+      clickProject(listItem, projectIndex, Task, ProjectNavItems);
 
       targetList.appendChild(item);
     }

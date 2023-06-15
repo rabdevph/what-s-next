@@ -140,7 +140,6 @@ export default function Task(taskSection, projectName) {
       deltaskWrapper.appendChild(del);
 
       const taskStatus = project.getTaskStatus(taskIndex);
-      console.log(taskStatus);
 
       checkTaskStatus(taskStatus, checkBox, checkBoxIcon, description);
 

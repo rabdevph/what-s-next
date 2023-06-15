@@ -1,13 +1,19 @@
-export function addHiddenClass(element) {
-  if (!element.classList.contains('hidden')) {
-    element.classList.add('hidden');
-  }
+export function addHiddenClass(elements) {
+  // elements -> array
+  elements.forEach((element) => {
+    if (!element.classList.contains('hidden')) {
+      element.classList.add('hidden');
+    }
+  });
 }
 
-export function removeHiddenClass(element) {
-  if (element.classList.contains('hidden')) {
-    element.classList.remove('hidden');
-  }
+export function removeHiddenClass(elements) {
+  // elements -> array
+  elements.forEach((element) => {
+    if (element.classList.contains('hidden')) {
+      element.classList.remove('hidden');
+    }
+  });
 }
 
 export function addErrorBgClass(element) {
@@ -71,11 +77,21 @@ export function addPriorityColorClass(wrapperElement, priority) {
   }
 }
 
-// add selected-project class to selected project
-export function addSelectedProjectClass(element) {
-  if (!element.classList.contains('selected-project')) {
-    element.classList.add('selected-project');
+// add selected-nav
+export function addSelectedNavClass(element) {
+  if (!element.classList.contains('selected-nav')) {
+    element.classList.add('selected-nav');
   }
+}
+
+// remove selected-nav
+export function removeSelectedNavClass(elements) {
+  // elements -> array
+  elements.forEach((element) => {
+    if (element.classList.contains('selected-nav')) {
+      element.classList.remove('selected-nav');
+    }
+  });
 }
 
 // add delete icon to selected project

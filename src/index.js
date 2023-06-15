@@ -1,4 +1,5 @@
 import ProjectNavItems from './components/Projects';
+import Task from './components/TaskSection';
 
 import {
   clickCancelProject,
@@ -11,14 +12,14 @@ import {
 import { PERSONALPROJECT } from './utilities/helper';
 
 console.log('Hello World!');
-const projectsNavList = document.getElementById('projects-nav-list');
-ProjectNavItems(projectsNavList);
-
 // this will create a PERSONAL default project for new users
 PERSONALPROJECT();
 
+const projectsNavList = document.getElementById('projects-nav-list');
+ProjectNavItems(projectsNavList); // load projects list
+
 // EVENT HANDLERS
-clickNavListItems();
+clickNavListItems(ProjectNavItems, Task);
 clickNewProject(ProjectNavItems);
 clickCancelProject();
 sumbitNewProject(ProjectNavItems, projectsNavList);
