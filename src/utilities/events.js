@@ -40,7 +40,7 @@ const taskSection = document.getElementById('task-section');
 export function clickNavListItems(
   projectComponent,
   taskComponent,
-  upComingTasksComponent
+  taskOverviewComponent
 ) {
   navListItems.forEach((navListItem) => {
     navListItem.addEventListener('click', () => {
@@ -49,6 +49,8 @@ export function clickNavListItems(
       if (navListItem.id === 'today-list') {
         addSelectedNavClass(todayList);
         removeSelectedNavClass([upcomingList, personalList]);
+
+        taskOverviewComponent(taskSection, 'TODAY');
       }
 
       if (navListItem.id === 'upcoming-list') {
@@ -56,7 +58,7 @@ export function clickNavListItems(
 
         addSelectedNavClass(upcomingList);
         removeSelectedNavClass([todayList, personalList]);
-        upComingTasksComponent(taskSection);
+        taskOverviewComponent(taskSection, 'UPCOMING');
       }
 
       if (navListItem.id === 'personal-list') {

@@ -50,9 +50,9 @@ function createIsolatedTasks(projName, task, dueDate, priority, status) {
 }
 
 // isolate task and compile into object
-function getIsolatedTasks() {
+function getCompiledTasks() {
   const projects = getProjects();
-  const isolatedTasks = [];
+  const compiledTasks = [];
 
   projects.forEach((project) => {
     const projectTasks = project.tasks;
@@ -64,28 +64,57 @@ function getIsolatedTasks() {
         projectTask.priority,
         projectTask.status
       );
-      isolatedTasks.push(formattedTask);
+      compiledTasks.push(formattedTask);
     });
   });
 
-  return isolatedTasks;
+  return compiledTasks;
 }
 
-export function getUpcomingTasks() {
-  const isolatedTasks = getIsolatedTasks();
+export function getTaskSchedule(scope) {
+  const compiledTasks = getCompiledTasks();
 
-  const startDate = new Date();
-  const endDate = addDays(startDate, 7);
+  const today = new Date().setHours(0, 0, 0, 0);
+  const endDate = addDays(today, 7).setHours(0, 0, 0, 0);
 
-  // use filter method to store the items in array(upComingTasks)
-  const upComingTasks = isolatedTasks.filter((task) => {
-    const dueDate = parse(task.dueDate, 'MMMM d, yyyy', new Date());
-    return isWithinInterval(dueDate, { start: startDate, end: endDate });
+  if (scope === 'TODAY') {
+    // show today task
+    console.log('show today tasks');
+
+    const todayTasks = compiledTasks.filter((task) => {
+      const taskDueDate = parse(
+        task.dueDate,
+        'MMMM d, yyyy',
+        new Date()
+      ).setHours(0, 0, 0, 0);
+
+      return taskDueDate === today;
+    });
+
+    return todayTasks;
+  }
+
+  // show upcoming task
+  const upComingTasks = compiledTasks.filter((task) => {
+    const dueDate = parse(
+      task.dueDate,
+      'MMMM d, yyyy',
+      new Date().setHours(0, 0, 0, 0)
+    );
+    return isWithinInterval(dueDate, { start: today, end: endDate });
   });
 
   upComingTasks.sort((a, b) => {
-    const dateA = parse(a.dueDate, 'MMMM d, yyyy', new Date());
-    const dateB = parse(b.dueDate, 'MMMM d, yyyy', new Date());
+    const dateA = parse(
+      a.dueDate,
+      'MMMM d, yyyy',
+      new Date().setHours(0, 0, 0, 0)
+    );
+    const dateB = parse(
+      b.dueDate,
+      'MMMM d, yyyy',
+      new Date().setHours(0, 0, 0, 0)
+    );
     return dateA - dateB;
   });
 

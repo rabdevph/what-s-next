@@ -166,7 +166,6 @@ export default function Task(taskSection, projectName) {
 
       // check task due date
       checkTaskDueDate(projectTask.dueDate, item);
-      console.log(projectTask.dueDate);
 
       dueWrapper.appendChild(icon);
       dueWrapper.appendChild(date);

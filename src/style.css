@@ -311,7 +311,8 @@ nav {
 }
 
 .upcoming-bullet {
-  background-color: var(--clr-light-zinc);
+  /* background-color: var(--clr-light-zinc); */
+  border: 1px solid var(--clr-light-zinc);
   border-radius: 50%;
   height: 20px;
   width: 20px;

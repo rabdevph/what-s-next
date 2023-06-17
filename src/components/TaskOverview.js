@@ -1,20 +1,19 @@
 import { TaskHeader } from './TaskSection';
 
-import { getUpcomingTasks } from '../utilities/helper';
+import { getTaskSchedule } from '../utilities/helper';
 import { addPriorityColorClass } from '../utilities/controls';
 
-export default function UpcomingTasks(taskSection) {
-  taskSection.appendChild(TaskHeader('UPCOMING'));
+export default function TaskOverview(taskSection, scope) {
+  taskSection.appendChild(TaskHeader(scope));
 
-  const upComingTaskItems = getUpcomingTasks();
-  console.log(upComingTaskItems);
+  const tasks = getTaskSchedule(scope);
 
   // task list
   const list = document.createElement('ul');
   list.classList.add('upcomingList', 'flex-column');
 
-  if (upComingTaskItems.length !== 0) {
-    upComingTaskItems.forEach((task) => {
+  if (tasks.length !== 0) {
+    tasks.forEach((task) => {
       const item = document.createElement('li');
       item.classList.add('upcomingItem');
 
