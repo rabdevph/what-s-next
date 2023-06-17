@@ -23,7 +23,7 @@ export default function ProjectNavItems(targetList) {
       item.classList.add(
         `item${projectIndex}`,
         'list-item',
-        'flex-row',
+        'flex-row-ac',
         'padding-box'
       );
       item.setAttribute('id', `${project.toLowerCase()}-list`);
@@ -43,7 +43,7 @@ export default function ProjectNavItems(targetList) {
       delProjectWrapper.classList.add(
         'projectItemControl',
         'list-obj',
-        'flex-row',
+        'flex-row-ac',
         'hidden'
       );
       delProjectWrapper.setAttribute(

@@ -49,20 +49,16 @@ export function clickNavListItems(
       if (navListItem.id === 'today-list') {
         addSelectedNavClass(todayList);
         removeSelectedNavClass([upcomingList, personalList]);
-
         taskOverviewComponent(taskSection, 'TODAY');
       }
 
       if (navListItem.id === 'upcoming-list') {
-        console.log(navListItem.id);
-
         addSelectedNavClass(upcomingList);
         removeSelectedNavClass([todayList, personalList]);
         taskOverviewComponent(taskSection, 'UPCOMING');
       }
 
       if (navListItem.id === 'personal-list') {
-        // PERSONAL NAV
         const PERSONAL = personalList.getAttribute('data-id');
         addSelectedNavClass(personalList);
         removeSelectedNavClass([todayList, upcomingList]);

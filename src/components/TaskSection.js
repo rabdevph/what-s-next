@@ -41,7 +41,7 @@ function AddTask() {
   wrapper.setAttribute('id', 'add-task-wrapper');
 
   const button = document.createElement('button');
-  button.classList.add('addTask__button', 'flex-row');
+  button.classList.add('addTask__button', 'flex-row-ac');
   button.setAttribute('id', 'add-task');
   button.setAttribute('tabindex', '-1');
 
@@ -152,7 +152,7 @@ export default function Task(taskSection, projectName) {
       due.classList.add('taskDue');
 
       const dueWrapper = document.createElement('div');
-      dueWrapper.classList.add('taskDueWrapper', 'flex-row');
+      dueWrapper.classList.add('taskDueWrapper', 'flex-row-d');
       // add prioriry color here
       addPriorityColorClass(dueWrapper, projectTask.priority);
 
@@ -165,7 +165,7 @@ export default function Task(taskSection, projectName) {
       date.textContent = projectTask.dueDate.toUpperCase();
 
       // check task due date
-      checkTaskDueDate(projectTask.dueDate, item);
+      checkTaskDueDate(projectTask.dueDate, item, dueWrapper, icon);
 
       dueWrapper.appendChild(icon);
       dueWrapper.appendChild(date);

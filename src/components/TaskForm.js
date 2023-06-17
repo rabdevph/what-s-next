@@ -16,11 +16,11 @@ function TaskInput() {
 // CONTROLS
 function TaskControls() {
   const wrapper = document.createElement('div');
-  wrapper.classList.add('taskFormControls', 'flex-row');
+  wrapper.classList.add('taskFormControls', 'flex-row-ac');
 
   // date
   const dateWrapper = document.createElement('div');
-  dateWrapper.classList.add('taskDateWrapper', 'flex-row');
+  dateWrapper.classList.add('taskDateWrapper', 'flex-row-ac');
 
   const dateLabel = document.createElement('p');
   dateLabel.classList.add('taskDate__label');
@@ -43,7 +43,7 @@ function TaskControls() {
 
   // priority
   const priorityWrapper = document.createElement('div');
-  priorityWrapper.classList.add('taskPriorityWrapper', 'flex-row');
+  priorityWrapper.classList.add('taskPriorityWrapper', 'flex-row-ac');
 
   const priorityLabel = document.createElement('p');
   priorityLabel.classList.add('taskPriority__label');
@@ -52,7 +52,10 @@ function TaskControls() {
   priorityWrapper.appendChild(priorityLabel); // add to date wrapper
 
   const priorityButtonWrapper = document.createElement('div');
-  priorityButtonWrapper.classList.add('taskPriorityButtonWrapper', 'flex-row');
+  priorityButtonWrapper.classList.add(
+    'taskPriorityButtonWrapper',
+    'flex-row-ac'
+  );
   priorityButtonWrapper.setAttribute('id', 'priority-wrapper');
 
   const options = [
@@ -81,7 +84,7 @@ function TaskControls() {
 
   // cancel and save
   const taskButtonWrapper = document.createElement('div');
-  taskButtonWrapper.classList.add('taskButtonWrapper', 'flex-row');
+  taskButtonWrapper.classList.add('taskButtonWrapper', 'flex-row-ac');
 
   const cancel = document.createElement('input');
   cancel.classList.add('taskButton', 'taskButton__cancel', 'button-common');

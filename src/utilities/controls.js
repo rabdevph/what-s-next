@@ -1,4 +1,4 @@
-import { format, isBefore } from 'date-fns';
+import { isBefore } from 'date-fns';
 
 export function addHiddenClass(elements) {
   // elements -> array
@@ -139,18 +139,18 @@ export function checkTaskStatus(status, checkBox, checBoxIcon, description) {
   }
 }
 
-export function checkTaskDueDate(dueDate, item) {
+export function checkTaskDueDate(dueDate, item, dueWrapper, icon) {
   const today = new Date().setHours(0, 0, 0, 0);
   const due = new Date(dueDate).setHours(0, 0, 0, 0);
 
-  console.log(`due: ${due}`);
-  console.log(`today: ${today}`);
-  console.log(`due < today: ${due < today}`);
+  const dueIcon = icon;
+
   if (isBefore(due, today)) {
-    // change color of task
-    if (!item.classList.contains('past-due')) {
-      item.classList.add('past-due');
-    }
+    // change color of task due date and icon
+    item.classList.add('past-due-list');
+    dueWrapper.classList.add('past-due-date');
+
+    dueIcon.src = '../src/assets/warning.svg';
   }
 }
 

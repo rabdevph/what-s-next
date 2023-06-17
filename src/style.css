@@ -15,6 +15,7 @@
   --clr-med-zinc: #3f3f46;
   --clr-light-zinc: #52525b;
   --clr-gray: #6b7280;
+  --clr-alt-gray: #d1d5db;
   --clr-light-gray: #f4f4f5;
 
   --clr-blue: #2563eb;
@@ -298,12 +299,13 @@ nav {
   list-style-type: none;
   margin-top: 12px;
   padding: 2px 0;
-  gap: 4px;
+  gap: 8px;
 }
 
 .upcomingItem {
   background-color: var(--clr-white);
-  /* border: 2px solid var(--clr-white); */
+  border: 2px solid var(--clr-gray);
+  border-radius: 4px;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 4px;
@@ -311,7 +313,6 @@ nav {
 }
 
 .upcoming-bullet {
-  /* background-color: var(--clr-light-zinc); */
   border: 1px solid var(--clr-light-zinc);
   border-radius: 50%;
   height: 20px;
@@ -320,16 +321,12 @@ nav {
 
 .taskItem {
   background-color: var(--clr-white);
-  /* border: 2px solid var(--clr-white); */
+  border: 2px solid var(--clr-gray);
+  border-radius: 4px;
   padding: 12px 16px;
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr auto;
-}
-
-.past-due {
-  /* border: 2px solid var(--clr-warning); */
-  background-color: var(--clr-warning);
 }
 
 .taskItem__checkbox {
@@ -419,7 +416,11 @@ nav {
   padding: 4px 8px;
 }
 
-.flex-row {
+.flex-row-d {
+  display: flex;
+}
+
+.flex-row-ac {
   display: flex;
   align-items: center;
 }
@@ -491,6 +492,15 @@ nav {
 /* SELECTED PROJECT */
 .selected-nav {
   background-color: var(--clr-med-zinc);
+}
+
+/* PAST DUE DATE */
+.past-due-list {
+  background-color: var(--clr-alt-gray);
+}
+
+.past-due-date {
+  background-color: var(--clr-light-zinc);
 }
 
 /* ERROR BG COLOR */

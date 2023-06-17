@@ -28,11 +28,11 @@ export default function TaskOverview(taskSection, scope) {
 
       // info: due and project name
       const info = document.createElement('div');
-      info.classList.add('taskInfo', 'flex-row');
+      info.classList.add('taskInfo', 'flex-row-ac');
 
       // due wrapper
       const dueWrapper = document.createElement('div');
-      dueWrapper.classList.add('taskDueWrapper', 'flex-row');
+      dueWrapper.classList.add('taskDueWrapper', 'flex-row-d');
 
       // add prioriry color here
       addPriorityColorClass(dueWrapper, task.priority);
@@ -49,7 +49,7 @@ export default function TaskOverview(taskSection, scope) {
 
       // project wrapper
       const projWrapper = document.createElement('div');
-      projWrapper.classList.add('taskProjectWrapper', 'flex-row');
+      projWrapper.classList.add('taskProjectWrapper', 'flex-row-d');
 
       const projIcon = document.createElement('img');
       projIcon.classList.add('taskProject__icon');
@@ -61,23 +61,8 @@ export default function TaskOverview(taskSection, scope) {
       projWrapper.appendChild(projIcon);
       projWrapper.appendChild(proj);
 
-      // status wrapper
-      const statusWrapper = document.createElement('div');
-      statusWrapper.classList.add('taskStatusWrapper', 'flex-row');
-
-      const statusIcon = document.createElement('img');
-      statusIcon.classList.add('taskStatus__icon');
-      statusIcon.src = '../src/assets/status.svg';
-
-      const status = document.createElement('p');
-      status.textContent = task.status.toUpperCase();
-
-      statusWrapper.appendChild(statusIcon);
-      statusWrapper.appendChild(status);
-
       info.appendChild(dueWrapper);
       info.appendChild(projWrapper);
-      info.appendChild(statusWrapper);
 
       item.appendChild(bullet);
       item.appendChild(description);

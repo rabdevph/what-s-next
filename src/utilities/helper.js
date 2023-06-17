@@ -79,8 +79,6 @@ export function getTaskSchedule(scope) {
 
   if (scope === 'TODAY') {
     // show today task
-    console.log('show today tasks');
-
     const todayTasks = compiledTasks.filter((task) => {
       const taskDueDate = parse(
         task.dueDate,
