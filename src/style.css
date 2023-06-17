@@ -495,8 +495,12 @@ nav {
 }
 
 /* PAST DUE DATE */
-.past-due-list {
+.past-due-completed {
   background-color: var(--clr-alt-gray);
+}
+
+.past-due-pending {
+  background-color: var(--clr-warning);
 }
 
 .past-due-date {

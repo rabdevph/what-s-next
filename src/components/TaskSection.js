@@ -145,6 +145,7 @@ export default function Task(taskSection, projectName) {
 
       const taskStatus = project.getTaskStatus(taskIndex);
 
+      // check task status
       checkTaskStatus(taskStatus, checkBox, checkBoxIcon, description);
 
       // task due icon and date
@@ -165,7 +166,7 @@ export default function Task(taskSection, projectName) {
       date.textContent = projectTask.dueDate.toUpperCase();
 
       // check task due date
-      checkTaskDueDate(projectTask.dueDate, item, dueWrapper, icon);
+      checkTaskDueDate(projectTask.dueDate, item, dueWrapper, icon, taskStatus);
 
       dueWrapper.appendChild(icon);
       dueWrapper.appendChild(date);

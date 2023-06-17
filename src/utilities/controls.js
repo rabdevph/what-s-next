@@ -139,7 +139,7 @@ export function checkTaskStatus(status, checkBox, checBoxIcon, description) {
   }
 }
 
-export function checkTaskDueDate(dueDate, item, dueWrapper, icon) {
+export function checkTaskDueDate(dueDate, item, dueWrapper, icon, taskStatus) {
   const today = new Date().setHours(0, 0, 0, 0);
   const due = new Date(dueDate).setHours(0, 0, 0, 0);
 
@@ -147,7 +147,11 @@ export function checkTaskDueDate(dueDate, item, dueWrapper, icon) {
 
   if (isBefore(due, today)) {
     // change color of task due date and icon
-    item.classList.add('past-due-list');
+    if (taskStatus === 'completed') {
+      item.classList.add('past-due-completed');
+    } else {
+      item.classList.add('past-due-pending');
+    }
     dueWrapper.classList.add('past-due-date');
 
     dueIcon.src = '../src/assets/warning.svg';
