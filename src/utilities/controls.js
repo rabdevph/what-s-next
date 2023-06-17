@@ -137,6 +137,17 @@ export function checkTaskStatus(status, checkBox, checBoxIcon, description) {
   }
 }
 
+export function checkTaskDueDate(dueDate, item) {
+  const today = new Date();
+  const due = new Date(dueDate);
+  if (due < today) {
+    // change color of task
+    if (!item.classList.contains('past-due')) {
+      item.classList.add('past-due');
+    }
+  }
+}
+
 export function clearInput(targetElement) {
   const element = targetElement;
   element.value = '';

@@ -23,6 +23,7 @@
   --clr-red: #ef4444;
 
   --clr-error: #f87171;
+  --clr-warning: #fdba74;
 }
 
 *,
@@ -302,6 +303,7 @@ nav {
 
 .upcomingItem {
   background-color: var(--clr-white);
+  /* border: 2px solid var(--clr-white); */
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 4px;
@@ -317,10 +319,16 @@ nav {
 
 .taskItem {
   background-color: var(--clr-white);
+  /* border: 2px solid var(--clr-white); */
   padding: 12px 16px;
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr auto;
+}
+
+.past-due {
+  /* border: 2px solid var(--clr-warning); */
+  background-color: var(--clr-warning);
 }
 
 .taskItem__checkbox {
@@ -356,6 +364,7 @@ nav {
 .taskDueWrapper,
 .taskProjectWrapper,
 .taskStatusWrapper {
+  border-radius: 2px;
   color: var(--fc-white);
   font-weight: bold;
   gap: 4px;

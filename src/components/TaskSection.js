@@ -4,6 +4,7 @@ import {
   clearContent,
   addPriorityColorClass,
   checkTaskStatus,
+  checkTaskDueDate,
 } from '../utilities/controls';
 import {
   submitTaskForm,
@@ -79,6 +80,9 @@ export default function Task(taskSection, projectName) {
 
   if (projectTasks.length !== 0) {
     // if task is not empty, display the tasks.
+    // sort task by due date
+    projectTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
     projectTasks.forEach((projectTask, taskIndex) => {
       const item = document.createElement('li');
       item.classList.add('taskItem', `taskItem${taskIndex}`);
@@ -159,6 +163,10 @@ export default function Task(taskSection, projectName) {
       const date = document.createElement('p');
       date.classList.add('taskDue__date');
       date.textContent = projectTask.dueDate.toUpperCase();
+
+      // check task due date
+      checkTaskDueDate(projectTask.dueDate, item);
+      console.log(projectTask.dueDate);
 
       dueWrapper.appendChild(icon);
       dueWrapper.appendChild(date);

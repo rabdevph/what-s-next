@@ -1,4 +1,4 @@
-import { addDays, subDays, isWithinInterval, parse, format } from 'date-fns';
+import { addDays, isWithinInterval, parse } from 'date-fns';
 
 import createProject from './todo';
 import { saveToStorage, retrieveFromStorage, getProjectNames } from './data';
@@ -74,7 +74,7 @@ function getIsolatedTasks() {
 export function getUpcomingTasks() {
   const isolatedTasks = getIsolatedTasks();
 
-  const startDate = subDays(new Date(), 1);
+  const startDate = new Date();
   const endDate = addDays(startDate, 7);
 
   // use filter method to store the items in array(upComingTasks)
