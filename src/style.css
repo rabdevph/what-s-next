@@ -105,15 +105,15 @@ nav {
 
 /* project delete wrapper */
 
-.itemControl__delete {
+.projectsNavControl__delete {
   background-image: url('../src/assets/delete.svg');
 }
 
-.itemControl__confirm {
+.projectsNavControl__confirm {
   background-image: url('../src/assets/check.svg');
 }
 
-.itemControl__cancel {
+.projectsNavControl__cancel {
   background-image: url('../src/assets/cross.svg');
 }
 

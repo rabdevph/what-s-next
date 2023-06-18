@@ -1,10 +1,11 @@
-import ProjectNavItems from './components/Projects';
+import ProjectsNav from './components/ProjectsNav';
 import Task from './components/TaskSection';
 import TaskOverview from './components/TaskOverview';
 
+import clickDefaultNavItem from './events/defaultNavEvents';
+
 import {
   clickCancelProject,
-  clickNavListItems,
   clickNewProject,
   clickNewProjectName,
   sumbitNewProject,
@@ -17,12 +18,17 @@ console.log('Hello World!');
 PERSONALPROJECT();
 
 const projectsNavList = document.getElementById('projects-nav-list');
-ProjectNavItems(projectsNavList); // load projects list
+ProjectsNav(projectsNavList); // load projects list
+
+const taskSection = document.getElementById('task-section');
+TaskOverview(taskSection, 'TODAY');
 
 // EVENT HANDLERS
-clickNavListItems(ProjectNavItems, Task, TaskOverview);
-clickNewProject(ProjectNavItems);
+// DEFAULT NAV -  TODAY, UPCOMING, PERSONAL
+clickDefaultNavItem(ProjectsNav, Task, TaskOverview);
+
+clickNewProject(ProjectsNav);
 clickCancelProject();
-sumbitNewProject(ProjectNavItems, projectsNavList);
+sumbitNewProject(ProjectsNav, projectsNavList);
 clickNewProjectName();
 inputNewProjectName();

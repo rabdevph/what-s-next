@@ -3,6 +3,8 @@ import { addDays, isWithinInterval, parse } from 'date-fns';
 import createProject from './todo';
 import { saveToStorage, retrieveFromStorage, getProjectNames } from './data';
 
+export const SELECTEDPRIORITY = [];
+
 export function isProjectExisting(name) {
   const projectNames = getProjectNames();
   const isExisting = projectNames.some((projectName) => projectName === name);

@@ -115,11 +115,10 @@ export function addDeleteWord(element) {
   textElement.textContent = `DELETE "${text}"?`;
 }
 
-export function removeDeleteWord(element, dataId) {
+export function removeDeleteWord(element, projectName) {
   const textElement = element;
-  const text = dataId;
 
-  textElement.textContent = text;
+  textElement.textContent = projectName;
 }
 
 export function checkTaskStatus(status, checkBox, checBoxIcon, description) {

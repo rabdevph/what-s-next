@@ -1,29 +1,28 @@
 import { format } from 'date-fns';
 
 import {
-  addDeleteIcon,
-  addDeleteWord,
   addErrorBgClass,
   addErrorBorderClass,
   addHiddenClass,
   addPrioritySelectedClass,
-  addSelectedNavClass,
-  removeDeleteIcon,
   removeErrorBgClass,
   removeErrorBorderClass,
   removeHiddenClass,
   removePrioritySelectedClass,
   clearInput,
   clearContent,
-  removeDeleteWord,
   removeSelectedNavClass,
 } from './controls';
-import { saveToStorage, removeFromStorage } from './data';
-import { isProjectExisting, getSelectedPriority } from './helper';
+import { saveToStorage } from './data';
+import {
+  SELECTEDPRIORITY,
+  isProjectExisting,
+  getSelectedPriority,
+} from './helper';
 import createProject from './todo';
 
 // CONSTANTS
-const SELECTEDPRIORITY = []; // array for priority value
+// const SELECTEDPRIORITY = []; // array for priority value
 
 const todayList = document.getElementById('today-list');
 const upcomingList = document.getElementById('upcoming-list');
@@ -31,141 +30,9 @@ const personalList = document.getElementById('personal-list');
 const newProjectButton = document.getElementById('new-project-button');
 const newProjectForm = document.getElementById('new-project-form');
 const newProjectName = document.getElementById('new-project-name');
-const navListItems = document.querySelectorAll('.navList__item');
 const projectsNavList = document.getElementById('projects-nav-list');
 const cancelNewProject = document.getElementById('cancel-new-project');
 const taskSection = document.getElementById('task-section');
-
-// DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
-export function clickNavListItems(
-  projectComponent,
-  taskComponent,
-  taskOverviewComponent
-) {
-  navListItems.forEach((navListItem) => {
-    navListItem.addEventListener('click', () => {
-      clearContent(taskSection);
-
-      if (navListItem.id === 'today-list') {
-        addSelectedNavClass(todayList);
-        removeSelectedNavClass([upcomingList, personalList]);
-        taskOverviewComponent(taskSection, 'TODAY');
-      }
-
-      if (navListItem.id === 'upcoming-list') {
-        addSelectedNavClass(upcomingList);
-        removeSelectedNavClass([todayList, personalList]);
-        taskOverviewComponent(taskSection, 'UPCOMING');
-      }
-
-      if (navListItem.id === 'personal-list') {
-        const PERSONAL = personalList.getAttribute('data-id');
-        addSelectedNavClass(personalList);
-        removeSelectedNavClass([todayList, upcomingList]);
-        taskComponent(taskSection, PERSONAL); // populate task section: Task(taskSection)
-      }
-
-      projectComponent(projectsNavList); // reload projects list: ProjectNavItems(projectsNavList)
-
-      SELECTEDPRIORITY.splice(0);
-
-      removeHiddenClass([newProjectButton]);
-      addHiddenClass([newProjectForm]);
-      removeErrorBgClass(newProjectName);
-      clearInput(newProjectName);
-    });
-  });
-}
-
-// PROJECTS NAVIGATION LIST
-export function clickProject(
-  listItem,
-  projectIndex,
-  componentFunc,
-  reloadProjectsList
-) {
-  listItem.addEventListener('click', () => {
-    const projectName = listItem.dataset.id;
-
-    SELECTEDPRIORITY.splice(0); // clear priority array
-
-    reloadProjectsList(projectsNavList); // reload Projects: ProjectNavItems(projectsNavList)
-
-    // get elements here after reloading the list
-    const projectsNavListItem = document.querySelector(
-      `[data-list-no="${projectIndex}"]`
-    );
-    const itemControlWrapper = document.getElementById(
-      `project-${projectIndex}-control-wrapper`
-    );
-
-    removeSelectedNavClass([todayList, upcomingList, personalList]); // remove selected
-    addSelectedNavClass(projectsNavListItem); // change background of selected project
-    removeHiddenClass([itemControlWrapper, newProjectButton]); // show delete and new project
-    componentFunc(taskSection, projectName); // populate task section: Task(taskSection, projectName)
-    addHiddenClass([newProjectForm]); // if not hidden, hide new project form
-    removeErrorBgClass(newProjectName); // if there's error, remove error class
-    clearInput(newProjectName); // clear input
-  });
-}
-
-// DELETE PROJECT BUTTON
-export function clickDeleteProject(element, dataIndex) {
-  element.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    const cancelDelete = document.querySelector(
-      `[data-project-cancel-button="${dataIndex}"]`
-    );
-    const confirmDelete = document.querySelector(
-      `[data-project-confirm-button="${dataIndex}"]`
-    );
-    const itemText = document.querySelector(`.item${dataIndex}__text`);
-    const itemIcon = document.querySelector(`.item${dataIndex}__icon`);
-
-    addDeleteWord(itemText);
-    addDeleteIcon(itemIcon);
-    addHiddenClass([element]);
-    removeHiddenClass([cancelDelete, confirmDelete]);
-  });
-}
-
-// CANCEL DELETE PROJECT
-export function clickCancelDeleteProject(element, dataIndex) {
-  element.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    const del = document.querySelector(
-      `[data-project-delete-button="${dataIndex}"]`
-    );
-    const confirmDelete = document.querySelector(
-      `[data-project-confirm-button="${dataIndex}"]`
-    );
-    const itemText = document.querySelector(`.item${dataIndex}__text`);
-    const itemIcon = document.querySelector(`.item${dataIndex}__icon`);
-    const listItem = document.querySelector(`.item${dataIndex}`);
-    const listItemId = listItem.getAttribute('data-id');
-
-    removeDeleteWord(itemText, listItemId);
-    removeDeleteIcon(itemIcon);
-    removeHiddenClass([del]);
-    addHiddenClass([element, confirmDelete]);
-  });
-}
-
-// CONFIRM DELETE PROJECT
-export function clickConfirmDeleteProject(
-  element,
-  projectName,
-  reloadProjectsList
-) {
-  element.addEventListener('click', (e) => {
-    e.stopPropagation();
-    removeFromStorage(projectName); // delete project
-    reloadProjectsList(projectsNavList); // reload projects nav list
-    clearContent(taskSection);
-  });
-}
 
 // NEW PROJECT BUTTON
 export function clickNewProject(reloadProjects) {
