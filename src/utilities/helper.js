@@ -77,7 +77,8 @@ export function getTaskSchedule(scope) {
   const compiledTasks = getCompiledTasks();
 
   const today = new Date().setHours(0, 0, 0, 0);
-  const endDate = addDays(today, 7).setHours(0, 0, 0, 0);
+  const tomorrow = addDays(today, 1);
+  const endDate = addDays(tomorrow, 7).setHours(0, 0, 0, 0);
 
   if (scope === 'TODAY') {
     // show today task
@@ -101,7 +102,7 @@ export function getTaskSchedule(scope) {
       'MMMM d, yyyy',
       new Date().setHours(0, 0, 0, 0)
     );
-    return isWithinInterval(dueDate, { start: today, end: endDate });
+    return isWithinInterval(dueDate, { start: tomorrow, end: endDate });
   });
 
   upComingTasks.sort((a, b) => {

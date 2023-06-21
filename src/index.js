@@ -1,32 +1,34 @@
 import ProjectsNav from './components/ProjectsNav';
-import Task from './components/TaskSection';
+import TaskSection from './components/TaskSection';
 import TaskOverview from './components/TaskOverview';
 
-import clickDefaultNavItem from './events/defaultNavEvents';
-
+import clickDefaultNavItem from './events/eventsDefaultNav';
 import {
-  clickCancelProject,
   clickNewProject,
-  clickNewProjectName,
+  clickCancelProject,
   sumbitNewProject,
+  clickNewProjectName,
   inputNewProjectName,
-} from './utilities/events';
+} from './events/eventsNewProject';
+
 import { PERSONALPROJECT } from './utilities/helper';
 
 console.log('Hello World!');
-// this will create a PERSONAL default project for new users
+// create a PERSONAL project(default) for first time users
 PERSONALPROJECT();
 
 const projectsNavList = document.getElementById('projects-nav-list');
-ProjectsNav(projectsNavList); // load projects list
+// load projects list
+ProjectsNav(projectsNavList);
 
-const taskSection = document.getElementById('task-section');
-TaskOverview(taskSection, 'TODAY');
+// const taskSection = document.getElementById('task-section');
+TaskOverview('TODAY');
 
 // EVENT HANDLERS
 // DEFAULT NAV -  TODAY, UPCOMING, PERSONAL
-clickDefaultNavItem(ProjectsNav, Task, TaskOverview);
+clickDefaultNavItem(ProjectsNav, TaskSection, TaskOverview);
 
+// NEW PROJECT
 clickNewProject(ProjectsNav);
 clickCancelProject();
 sumbitNewProject(ProjectsNav, projectsNavList);

@@ -1,4 +1,4 @@
-import Task from './TaskSection';
+import TaskSection from './TaskSection';
 
 import { getProjectNames } from '../utilities/data';
 import { clearContent } from '../utilities/controls';
@@ -8,7 +8,7 @@ import {
   clickDeleteProject,
   clickCancelDeleteProject,
   clickConfirmDeleteProject,
-} from '../events/projectsNavEvents';
+} from '../events/eventsProjectsNav';
 
 export default function ProjectsNav(projectsNavList) {
   clearContent(projectsNavList); // clear list before loading component
@@ -86,7 +86,7 @@ export default function ProjectsNav(projectsNavList) {
       item.appendChild(controlWrapper);
 
       // Projects click event handler
-      clickProjectsNavItem(item, Task, ProjectsNav);
+      clickProjectsNavItem(item, TaskSection, ProjectsNav);
 
       projectsNavList.appendChild(item);
     }

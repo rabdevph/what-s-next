@@ -27,7 +27,7 @@ const taskSection = document.getElementById('task-section');
 // DEFAULT NAVIGATION LIST - TODAY, UPCOMING, PERSONAL
 export default function clickDefaultNavItem(
   projectsNavComponent,
-  taskComponent,
+  taskSectionComponent,
   taskOverviewComponent
 ) {
   defaultNavItems.forEach((defaultNavItem) => {
@@ -37,20 +37,20 @@ export default function clickDefaultNavItem(
       if (defaultNavItem.id === 'today-list') {
         addSelectedNavClass(todayList);
         removeSelectedNavClass([upcomingList, personalList]);
-        taskOverviewComponent(taskSection, 'TODAY');
+        taskOverviewComponent('TODAY');
       }
 
       if (defaultNavItem.id === 'upcoming-list') {
         addSelectedNavClass(upcomingList);
         removeSelectedNavClass([todayList, personalList]);
-        taskOverviewComponent(taskSection, 'UPCOMING');
+        taskOverviewComponent('UPCOMING');
       }
 
       if (defaultNavItem.id === 'personal-list') {
         const PERSONAL = personalList.getAttribute('data-id');
         addSelectedNavClass(personalList);
         removeSelectedNavClass([todayList, upcomingList]);
-        taskComponent(taskSection, PERSONAL); // populate task section: Task(taskSection)
+        taskSectionComponent(PERSONAL); // populate task section: Task(taskSection)
       }
 
       projectsNavComponent(projectsNavList); // reload projects list: ProjectNavItems(projectsNavList)

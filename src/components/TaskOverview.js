@@ -1,9 +1,10 @@
-import { TaskHeader } from './TaskSection';
+import TaskHeader from './TaskHeader';
 
 import { getTaskSchedule } from '../utilities/helper';
 import { addPriorityColorClass } from '../utilities/controls';
 
-export default function TaskOverview(taskSection, scope) {
+export default function TaskOverview(scope) {
+  const taskSection = document.getElementById('task-section');
   taskSection.appendChild(TaskHeader(scope));
 
   const tasks = getTaskSchedule(scope);

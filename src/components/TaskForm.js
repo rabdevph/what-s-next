@@ -1,5 +1,7 @@
 import { format } from 'date-fns';
 
+import { clickInput, clickPriority } from '../events/eventsTaskForm';
+
 // INPUT
 function TaskInput() {
   const input = document.createElement('input');
@@ -9,6 +11,7 @@ function TaskInput() {
   input.setAttribute('placeholder', 'Enter your task here');
   input.setAttribute('tabindex', '-1');
   input.setAttribute('autocomplete', 'off');
+  clickInput(input);
 
   return input;
 }
@@ -18,7 +21,7 @@ function TaskControls() {
   const wrapper = document.createElement('div');
   wrapper.classList.add('taskFormControls', 'flex-row-ac');
 
-  // date
+  // DATE
   const dateWrapper = document.createElement('div');
   dateWrapper.classList.add('taskDateWrapper', 'flex-row-ac');
 
@@ -41,7 +44,7 @@ function TaskControls() {
 
   dateWrapper.appendChild(date); // add to wrapper
 
-  // priority
+  // PRIORITY
   const priorityWrapper = document.createElement('div');
   priorityWrapper.classList.add('taskPriorityWrapper', 'flex-row-ac');
 
@@ -69,38 +72,40 @@ function TaskControls() {
     button.classList.add(
       `taskPriority__button`,
       `taskPriority__button--${option.value}`
-      // 'button-common'
     );
     button.setAttribute('id', `${option.value}-priority-button`);
     button.setAttribute('type', 'button');
     button.setAttribute('value', `${option.label.toUpperCase()}`);
     button.setAttribute('tabindex', '-1');
-    button.setAttribute('data-priority', option.value); // data-priority
+    button.setAttribute('data-priority', option.value);
+    clickPriority(button, priorityButtonWrapper);
 
-    priorityButtonWrapper.appendChild(button); // add to priority wrapper
+    priorityButtonWrapper.appendChild(button);
   });
 
   priorityWrapper.appendChild(priorityButtonWrapper);
 
-  // cancel and save
+  // CANCEL AND SAVE
   const taskButtonWrapper = document.createElement('div');
   taskButtonWrapper.classList.add('taskButtonWrapper', 'flex-row-ac');
 
+  // CANCEL
   const cancel = document.createElement('input');
   cancel.classList.add('taskButton', 'taskButton__cancel', 'button-common');
   cancel.setAttribute('id', 'cancel-task');
   cancel.setAttribute('type', 'button');
   cancel.setAttribute('value', 'CANCEL');
   cancel.setAttribute('tabindex', '-1');
-  taskButtonWrapper.appendChild(cancel); // add to button wrapper
+  taskButtonWrapper.appendChild(cancel);
 
+  // SAVE
   const save = document.createElement('input');
   save.classList.add('taskButton', 'taskButton__save', 'button-common');
   save.setAttribute('id', 'save-task');
   save.setAttribute('type', 'submit');
   save.setAttribute('value', 'SAVE');
   save.setAttribute('tabindex', '-1');
-  taskButtonWrapper.appendChild(save); // add to button wrapper
+  taskButtonWrapper.appendChild(save);
 
   // add to main wrapper
   wrapper.appendChild(dateWrapper);
@@ -116,8 +121,8 @@ export default function TaskForm() {
   form.classList.add('taskForm', 'flex-column', 'hidden');
   form.setAttribute('id', 'task-form');
 
-  form.appendChild(TaskInput()); // add text area to form
-  form.appendChild(TaskControls()); // add task controls - date, priority, buttons
+  form.appendChild(TaskInput());
+  form.appendChild(TaskControls());
 
   return form;
 }

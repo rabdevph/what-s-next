@@ -31,7 +31,7 @@ const taskSection = document.getElementById('task-section');
 // PROJECTS NAVIGATION LIST
 export function clickProjectsNavItem(
   projectsNavItem,
-  componentFunc,
+  taskSectionComponent,
   reloadProjectsList
 ) {
   projectsNavItem.addEventListener('click', () => {
@@ -51,7 +51,7 @@ export function clickProjectsNavItem(
     removeSelectedNavClass([todayList, upcomingList, personalList]); // remove selected
     addSelectedNavClass(item); // change background of selected project
     removeHiddenClass([itemControlWrapper, newProjectButton]); // show delete and new project
-    componentFunc(taskSection, projectName); // populate task section: Task(taskSection, projectName)
+    taskSectionComponent(projectName); // populate task section: Task(taskSection, projectName)
     addHiddenClass([newProjectForm]); // if not hidden, hide new project form
     removeErrorBgClass(newProjectName); // if there's error, remove error class
     clearInput(newProjectName); // clear input
