@@ -14,8 +14,6 @@ import { saveToStorage } from '../utilities/data';
 
 import { SELECTEDPRIORITY, getSelectedPriority } from '../utilities/helper';
 
-const TASK_SECTION = document.getElementById('task-section');
-
 export function clickInput(element) {
   element.addEventListener('click', () => {
     removeErrorBorderClass(element);
@@ -33,7 +31,11 @@ export function clickPriority(button, buttonWrapper) {
 }
 
 // SAVE BUTTON/FORM SUBMIT
-export function submitTaskForm(project, reloadTaskComponent, submitArgs) {
+export function submitTaskForm(
+  project,
+  reloadTaskSectionComponent,
+  submitArgs
+) {
   const [FORM, INPUT, TASK_DATE, PRIORITY_WRAPPER] = submitArgs;
 
   FORM.addEventListener('submit', (e) => {
@@ -60,7 +62,7 @@ export function submitTaskForm(project, reloadTaskComponent, submitArgs) {
       SELECTEDPRIORITY.splice(0);
 
       // reload task section - Task(taskSection, projectName)
-      reloadTaskComponent(TASK_SECTION, project.name);
+      reloadTaskSectionComponent(project.name);
     }
   });
 }

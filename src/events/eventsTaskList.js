@@ -6,8 +6,7 @@ import { saveToStorage } from '../utilities/data';
 export function clickTaskCheckBox(
   checkBoxes,
   project,
-  reloadTaskComponent,
-  taskSection
+  reloadTaskSectionComponent
 ) {
   checkBoxes.forEach((checkBox, taskIndex) => {
     checkBox.addEventListener('click', (e) => {
@@ -22,7 +21,7 @@ export function clickTaskCheckBox(
         project.changeTaskStatus(taskIndex); // change status
         saveToStorage(project.name, project); // save or update localStorage
         // reload task section - Task(taskSection, projectName)
-        reloadTaskComponent(taskSection, project.name);
+        reloadTaskSectionComponent(project.name);
       }
     });
   });

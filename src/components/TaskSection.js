@@ -51,5 +51,5 @@ export default function TaskSection(projectName) {
 
   const taskCheckBoxes = document.querySelectorAll('.taskItem__checkbox');
   // checkTask(project, Task);
-  clickTaskCheckBox(taskCheckBoxes, project, TaskSection, taskSection);
+  clickTaskCheckBox(taskCheckBoxes, project, TaskSection);
 }
